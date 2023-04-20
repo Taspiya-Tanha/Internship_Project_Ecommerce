@@ -59,14 +59,31 @@
                     <div class="d-grid login-pharmacy mb-25">
                             <a href="{{ route('google.login') }}" class="btn btn-danger btn-start" style="background: #dc3545!important;">Sing In with Google</a>
                     </div>
-                    <div class="create-account create-sign">
-                        <p>Don't have an account? <a href="javascript:;" class="popup-toggle1">Create one</a>
+                    <div class="create-account create-sign mb-5">
+                        <p>Don't have an account? <a href="javascript:;" class="popup-toggle1 mb-3">Create one</a>
                         </p>
                     </div>
                 </form>
+               
+
             </div>
+            <div class="mt-5 d-block" style="margin:20px 0 0 0">
+                <p>role:admin</p>
+                <p>email: admin@gmail.com</p>
+                <p>password: 12345678</p>
+            </div>
+
+            <div class="mt-5 d-block" style="margin:20px 0 0 0">
+                <p>role:buyer</p>
+                <p>email: buyer@gmail.com</p>
+                <p>password: 12345678</p>
+            </div>
+           
         </div>
     </div>
+    
 </div>
+
+
 
 {{-- login end --}}
