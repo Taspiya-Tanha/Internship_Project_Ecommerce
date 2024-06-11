@@ -179,7 +179,8 @@ class CartController extends Controller
 
     public function deleteCart($id)
     {
-        $cart = Cart::find($id);
+        $cart = ProductWishlist::find($id);
+        // dd($cart);
         $cart->delete();
         $notification = [
             'message' => 'Product Successfully Deleted',

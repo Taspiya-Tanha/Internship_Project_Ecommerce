@@ -66,9 +66,9 @@
                                                     class="feather-arrow-right ml-5"></i></a>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-lg-6">
+                                    <div class="col-md-6 col-lg-6  ">
                                         <div class="single-banner-slider">
-                                            <img src="{{ $banner->image_url }}" alt="">
+                                            <img style="height: 600px;" src="{{ $banner->image_url }}" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@
                                             </div>
                                         </div>
                                         <div class="category-content">
-                                            <h4><a href="view-product.html">{{ $item->cat_name }}</a></h4>
+                                            <h4><a href="{{ route('category-wise-product', $item->cat_slug) }}">{{ $item->cat_name }}</a></h4>
                                         </div>
                                     </div>
                                     <!-- /Category Grid -->

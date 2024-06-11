@@ -20,9 +20,9 @@ class ProductPriceFactory extends Factory
     public function definition()
     {
         return [
-            'product_id' => $this->faker->numberBetween(1,60),
-            'price' => $this->faker->numberBetween(100,1000),
-            'discount' => $this->faker->numberBetween(10,100),
+            // 'product_id' => $this->faker->numberBetween(1),
+            // 'price' => $this->faker->numberBetween(100),
+            // 'discount' => $this->faker->numberBetween(10),
         ];
     }
 }

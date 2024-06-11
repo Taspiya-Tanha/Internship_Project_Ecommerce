@@ -15,6 +15,53 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::factory()->count(12)->create();
+        // Category::factory()->count(5)->create();
+
+
+        $category = new Category();
+        $category->cat_name = "Smartphone";
+        $category->cat_slug = str()->slug($category->cat_name);
+        $category->image = "s24" ;
+        $category->image_url = "https://placeholder.tn/dist/images/phone.png";
+        $category->save();
+
+        
+        $category = new Category();
+        $category->cat_name = "Tablet";
+        $category->cat_slug = str()->slug($category->cat_name);
+        $category->image = "s24" ;
+        $category->image_url = "https://placeholder.tn/dist/images/phone.png";
+        $category->save();
+
+        $category = new Category();
+        $category->cat_name = "Laptop";
+        $category->cat_slug = str()->slug($category->cat_name);
+        $category->image = "s24" ;
+        $category->image_url = "https://img.freepik.com/premium-photo/3d-laptop-white-background_751108-625.jpg";
+        $category->save();
+
+        $category = new Category();
+        $category->cat_name = "Smartwatch";
+        $category->cat_slug = str()->slug($category->cat_name);
+        $category->image = "s24" ;
+        $category->image_url = "https://mir-s3-cdn-cf.behance.net/project_modules/disp/cdc06440412781.577e48e9a3380.gif";
+        $category->save();
+
+        $category = new Category();
+        $category->cat_name = "Sound Aplience";
+        $category->cat_slug = str()->slug($category->cat_name);
+        $category->image = "s24" ;
+        $category->image_url = "https://placeholder.tn/dist/images/phone.png";
+        $category->save();
+
+
+        $category = new Category();
+        $category->cat_name = "smart Tv";
+        $category->cat_slug = str()->slug($category->cat_name);
+        $category->image = "s24" ;
+        $category->image_url = "https://placeholder.tn/dist/images/phone.png";
+        $category->save();
+
+
     }
 }

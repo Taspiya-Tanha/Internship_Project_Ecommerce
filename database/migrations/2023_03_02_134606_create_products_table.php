@@ -32,7 +32,7 @@ return new class extends Migration
             $table->text('title');
             $table->text('slug_unique')->nullable();
             $table->string('image')->nullable();
-            $table->string('image_url')->nullable();
+            $table->longText('image_url')->nullable();
             $table->string('sku');
             $table->integer('stock');
             $table->integer('purchase_price')->nullable();

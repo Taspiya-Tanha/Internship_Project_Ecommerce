@@ -22,6 +22,9 @@ class HomePageController extends Controller
             ->limit(8)
             ->get();
 
+
+            // dd($products );
+
         $banners = Product::where('banner', 1)
             ->limit(4)
             ->latest()
