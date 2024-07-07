@@ -204,6 +204,9 @@ Route::controller(CartController::class)->group(function(){
     Route::post('/checkout','checkout')->name('checkout')->middleware(['auth']);
     //stripe payement
         Route::post('/payment-with-stripe','stripe')->name('paymentWithStripe');
+
+    //order
+    Route::post('/place-order', 'placeOrder')->name('placeOrder');
 });
 
 // fortend all controller end

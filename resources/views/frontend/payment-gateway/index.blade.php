@@ -10,7 +10,7 @@
                     <p>{{ Session::get('success') }}</p>
                 </div>
             @endif
-            <form role="form" action="{{ route('paymentWithStripe') }}" method="POST" data-cc-on-file="false"
+            <form role="form" action="{{ route('placeOrder') }}" method="POST" data-cc-on-file="false"
                 data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form" class="require-validation">
                 @csrf
                 <div class="row">

@@ -21,7 +21,7 @@ class ReviewFactory extends Factory
     {
         return [
             'user_id'=>$this->faker->numberBetween(1,5),
-            'product_id'=>$this->faker->numberBetween(1,60),
+            'product_id'=>$this->faker->numberBetween(1,19),
             'comment_id'=>$this->faker->numberBetween(1,50),
             'ratings'=>$this->faker->numberBetween(1,5),
         ];

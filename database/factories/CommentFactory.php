@@ -20,7 +20,7 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->numberBetween(1),
+            'user_id' => $this->faker->numberBetween(1, 5),
             'product_id' => $this->faker->numberBetween(1,60),
             'comment' => $this->faker->sentence(25),
 

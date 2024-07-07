@@ -133,14 +133,17 @@
                                             </ul>
                                             <p>Total <span class="total-brand">
                                                     @if (isset($discountPrice))
-                                                    <input type="hidden" value="{{ $new_price }}" name="discount_price">
+                                                        <input type="hidden" value="{{ $new_price }}"
+                                                            name="discount_price">
                                                         {{ $new_price }}
                                                     @elseif (isset($FixedDiscountPrice))
                                                         {{ $FixeDdiscount }}
-                                                        <input type="hidden" value="{{ $FixeDdiscount }}" name="discount_price">
+                                                        <input type="hidden" value="{{ $FixeDdiscount }}"
+                                                            name="discount_price">
                                                     @else
                                                         {{ $total }}
-                                                        <input type="hidden" value="{{ $total }}" name="discount_price">
+                                                        <input type="hidden" value="{{ $total }}"
+                                                            name="discount_price">
                                                     @endif
                                                 </span>
                                             </p>

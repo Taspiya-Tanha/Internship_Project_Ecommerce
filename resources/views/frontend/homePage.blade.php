@@ -20,7 +20,8 @@
         }
 
         .success_wish,
-        .success {
+        .success,
+        .order_success {
             position: fixed;
             right: 20px;
             top: 20px;
@@ -48,6 +49,11 @@
     <div class="success_wish">
         <p class="noti-title">Succeessfully Add to WishList!</p>
     </div>
+    <div class="order_success">
+        <p class="noti-title">Order Placed Succesfully!</p>
+    </div>
+    </div>
+
     <main class="main">
         <section class="banner-section position-relative">
             <div class="container">
@@ -62,8 +68,8 @@
                                                 {{ $banner->title }}
                                             </h1>
                                             <p>{{ $banner->description }} </p>
-                                            <a href="{{ route('product.details.create', $banner->slug_unique) }}" class="shop-now">Shop Now <i
-                                                    class="feather-arrow-right ml-5"></i></a>
+                                            <a href="{{ route('product.details.create', $banner->slug_unique) }}"
+                                                class="shop-now">Shop Now <i class="feather-arrow-right ml-5"></i></a>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-6  ">
@@ -140,7 +146,9 @@
                                             </div>
                                         </div>
                                         <div class="category-content">
-                                            <h4><a href="{{ route('category-wise-product', $item->cat_slug) }}">{{ $item->cat_name }}</a></h4>
+                                            <h4><a
+                                                    href="{{ route('category-wise-product', $item->cat_slug) }}">{{ $item->cat_name }}</a>
+                                            </h4>
                                         </div>
                                     </div>
                                     <!-- /Category Grid -->
@@ -178,8 +186,12 @@
                                                 </a>
                                             </div>
                                             @php
-                                                $price = $product->productPrice != null ? $product->productPrice->price : 0;
-                                                $discount = $product->productPrice != null ? $product->productPrice->discount : 0;
+                                                $price =
+                                                    $product->productPrice != null ? $product->productPrice->price : 0;
+                                                $discount =
+                                                    $product->productPrice != null
+                                                        ? $product->productPrice->discount
+                                                        : 0;
                                                 if ($discount != null) {
                                                     $ammount = ($discount / $price) * 100;
                                                 }
@@ -205,11 +217,11 @@
                                                         $five = App\Models\Review::where('product_id', $product->id)
                                                             ->where('ratings', 5)
                                                             ->count();
-                                                        
+
                                                         $four = App\Models\Review::where('product_id', $product->id)
                                                             ->where('ratings', 4)
                                                             ->count();
-                                                        
+
                                                         $three = App\Models\Review::where('product_id', $product->id)
                                                             ->where('ratings', 3)
                                                             ->count();
@@ -219,8 +231,12 @@
                                                         $one = App\Models\Review::where('product_id', $product->id)
                                                             ->where('ratings', 1)
                                                             ->count();
-                                                        $totalCount = App\Models\Review::where('product_id', $product->id)->count();
-                                                        $totalRatings = $five * 5 + $four * 4 + $three * 3 + $two * 2 + $one * 1;
+                                                        $totalCount = App\Models\Review::where(
+                                                            'product_id',
+                                                            $product->id,
+                                                        )->count();
+                                                        $totalRatings =
+                                                            $five * 5 + $four * 4 + $three * 3 + $two * 2 + $one * 1;
                                                         $averageResult = 0;
                                                         if ($totalRatings > 0) {
                                                             $averageResult = ceil($totalRatings / $totalCount);
@@ -285,12 +301,14 @@
                                                 <a class="btn btn-primary addToCart" data-id={{ $product->id }}>
                                                     <i class="feather-shopping-bag me-1"></i>Add</a>
                                                 <div class="product-details-inner">
-                                                    <a href="{{ route('product.details.create', $product->slug_unique) }}"><i class="fi-rs-eye"></i></a>
+                                                    <a
+                                                        href="{{ route('product.details.create', $product->slug_unique) }}"><i
+                                                            class="fi-rs-eye"></i></a>
                                                     <a aria-label="Quick view" class="product-btn quickModal"
                                                         data-bs-toggle="modal" data-id="{{ $product->id }}"
                                                         data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                                    <a aria-label="Add To Wishlist" class="product-btn addToWishLists" data-id="{{ $product->id }}"
-                                                        ><i class="fi-rs-heart"></i></a>
+                                                    <a aria-label="Add To Wishlist" class="product-btn addToWishLists"
+                                                        data-id="{{ $product->id }}"><i class="fi-rs-heart"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -331,8 +349,14 @@
                                                 </a>
                                             </div>
                                             @php
-                                                $price = $trending->productPrice != null ? $trending->productPrice->price : 0;
-                                                $discount = $trending->productPrice != null ? $trending->productPrice->discount : 0;
+                                                $price =
+                                                    $trending->productPrice != null
+                                                        ? $trending->productPrice->price
+                                                        : 0;
+                                                $discount =
+                                                    $trending->productPrice != null
+                                                        ? $trending->productPrice->discount
+                                                        : 0;
                                                 if ($discount != null) {
                                                     $ammount = ($discount / $price) * 100;
                                                 }
@@ -359,11 +383,11 @@
                                                         $five = App\Models\Review::where('product_id', $trending->id)
                                                             ->where('ratings', 5)
                                                             ->count();
-                                                        
+
                                                         $four = App\Models\Review::where('product_id', $trending->id)
                                                             ->where('ratings', 4)
                                                             ->count();
-                                                        
+
                                                         $three = App\Models\Review::where('product_id', $trending->id)
                                                             ->where('ratings', 3)
                                                             ->count();
@@ -373,8 +397,12 @@
                                                         $one = App\Models\Review::where('product_id', $trending->id)
                                                             ->where('ratings', 1)
                                                             ->count();
-                                                        $totalCount = App\Models\Review::where('product_id', $trending->id)->count();
-                                                        $totalRatings = $five * 5 + $four * 4 + $three * 3 + $two * 2 + $one * 1;
+                                                        $totalCount = App\Models\Review::where(
+                                                            'product_id',
+                                                            $trending->id,
+                                                        )->count();
+                                                        $totalRatings =
+                                                            $five * 5 + $four * 4 + $three * 3 + $two * 2 + $one * 1;
                                                         $averageResult = 0;
                                                         if ($totalRatings > 0) {
                                                             $averageResult = ceil($totalRatings / $totalCount);
@@ -442,7 +470,8 @@
                                                     <a aria-label="Quick view" class="product-btn quickModal"
                                                         data-bs-toggle="modal" data-id="{{ $trending->id }}"
                                                         data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                                    <a aria-label="Add To Wishlist" class="product-btn addToWishLists" data-id="{{ $trending->id }}"><i class="fi-rs-heart"></i></a>
+                                                    <a aria-label="Add To Wishlist" class="product-btn addToWishLists"
+                                                        data-id="{{ $trending->id }}"><i class="fi-rs-heart"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -481,8 +510,12 @@
                                                 </a>
                                             </div>
                                             @php
-                                                $price = $product->productPrice != null ? $product->productPrice->price : 0;
-                                                $discount = $product->productPrice != null ? $product->productPrice->discount : 0;
+                                                $price =
+                                                    $product->productPrice != null ? $product->productPrice->price : 0;
+                                                $discount =
+                                                    $product->productPrice != null
+                                                        ? $product->productPrice->discount
+                                                        : 0;
                                                 if ($discount != null) {
                                                     $ammount = ($discount / $price) * 100;
                                                 }
@@ -507,11 +540,11 @@
                                                         $five = App\Models\Review::where('product_id', $product->id)
                                                             ->where('ratings', 5)
                                                             ->count();
-                                                        
+
                                                         $four = App\Models\Review::where('product_id', $product->id)
                                                             ->where('ratings', 4)
                                                             ->count();
-                                                        
+
                                                         $three = App\Models\Review::where('product_id', $product->id)
                                                             ->where('ratings', 3)
                                                             ->count();
@@ -521,8 +554,12 @@
                                                         $one = App\Models\Review::where('product_id', $product->id)
                                                             ->where('ratings', 1)
                                                             ->count();
-                                                        $totalCount = App\Models\Review::where('product_id', $product->id)->count();
-                                                        $totalRatings = $five * 5 + $four * 4 + $three * 3 + $two * 2 + $one * 1;
+                                                        $totalCount = App\Models\Review::where(
+                                                            'product_id',
+                                                            $product->id,
+                                                        )->count();
+                                                        $totalRatings =
+                                                            $five * 5 + $four * 4 + $three * 3 + $two * 2 + $one * 1;
                                                         $averageResult = 0;
                                                         if ($totalRatings > 0) {
                                                             $averageResult = ceil($totalRatings / $totalCount);
@@ -585,8 +622,8 @@
                                                 <a class="btn btn-primary addToCart" data-id="{{ $product->id }}"><i
                                                         class="feather-shopping-bag me-1"></i>Add</a>
                                                 <div class="product-details-inner">
-                                                    <a href="{{ route('product.details.create', $product->slug_unique) }}" class="product-btn"><i
-                                                            class="fi-rs-eye"></i></a>
+                                                    <a href="{{ route('product.details.create', $product->slug_unique) }}"
+                                                        class="product-btn"><i class="fi-rs-eye"></i></a>
                                                     <a aria-label="Quick view" class="product-btn quickModal"
                                                         data-bs-toggle="modal" data-id="{{ $product->id }}"
                                                         data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
@@ -816,13 +853,12 @@
                             setTimeout(() => {
                                 $('.Notification').css('display', 'none');
                             }, 4000);
-                        }else if(data.error_wish) {
+                        } else if (data.error_wish) {
                             $('.Notification_wish').css('display', 'block');
                             setTimeout(() => {
                                 $('.Notification_wish').css('display', 'none');
                             }, 4000);
-                        }
-                        else {
+                        } else {
                             $('.success_wish').css('display', 'block');
                             setTimeout(() => {
                                 $('.success_wish').css('display', 'none');
@@ -858,6 +894,18 @@
                     },
                 })
             })
+        </script>
+
+        <script>
+            var order_success = <?php echo session('order_success') == true ? 1 : 0; ?>;
+            console.log(order_success);
+
+            if (order_success) {
+                $('.order_success').css('display', 'block');
+                setTimeout(() => {
+                    $('.order_success').css('display', 'none');
+                }, 4000);
+            }
         </script>
     @endpush
 @endsection
