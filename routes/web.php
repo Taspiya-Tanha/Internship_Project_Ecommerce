@@ -14,6 +14,7 @@ use App\Http\Controllers\frontend\HomePageController;
 use App\Http\Controllers\backend\RecycleBinController;
 use App\Http\Controllers\backend\SubCategoryController;
 use App\Http\Controllers\backend\AdminProfileController;
+use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\frontend\ProductsListsController;
 use Illuminate\Support\Facades\Artisan;
 
@@ -24,7 +25,12 @@ Route::middleware('auth')->group(function () {
 });
 
 
-// backend controller start
+
+/*
+|--------------------------------------------------------------------------
+| Backend Controller Start
+|--------------------------------------------------------------------------
+*/
 // dashboard controller
 Route::group(['middleware' => ['auth', 'role:admin|manager|editor|seller']], function () {
     Route::controller(DashboardController::class)->group(function () {
@@ -83,7 +89,6 @@ Route::group(['middleware' => ['auth', 'role:admin|manager|editor|seller']], fun
     });
 
     Route::controller(CuponController::class)->group(function () {
-      
         // All Cupon
         Route::get('/all/product/cupon', 'allCupon')->name('all.product.cupon');
         Route::get('/create/all/cupon', 'createAllCupon')->name('create.all.cupon');
@@ -91,6 +96,10 @@ Route::group(['middleware' => ['auth', 'role:admin|manager|editor|seller']], fun
         Route::get('/edit/all/cupon/{id}', 'editAllCupon')->name('edit.all.cupon');
         Route::post('/update/all/cupon/{id}', 'updateAllCupon')->name('store.update.cupon');
         Route::post('/delete/all/cupon/{id}', 'deleteAllCupon')->name('delete.all.cupon');
+    });
+
+    Route::controller(OrderController::class)->group(function () {
+        Route::resource('orders', OrderController::class);
     });
 });
 
@@ -114,7 +123,20 @@ Route::get('/google/login', [ProfileController::class, 'login'])->name('google.l
 Route::get('/google/redriect', [ProfileController::class, 'redriect'])->name('google.redriect');
 // google login end
 
-// frontend all controller start
+
+
+
+
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Frontend Controller Start
+|--------------------------------------------------------------------------
+*/
 // HomePage Controller Start
 Route::controller(HomePageController::class)->group(function () {
     // home page setup
@@ -164,10 +186,10 @@ Route::controller(HomePageController::class)->group(function () {
     Route::get('/error/500/page', 'createError500Page')->name('error.500.create');
 
     // ajax
-    Route::get('/modal/product','modalProductId')->name('modal.product.id');
+    Route::get('/modal/product', 'modalProductId')->name('modal.product.id');
 
-    Route::get('user/change/password','userChangePassword')->name('user.change.password');
-    Route::put('user/update/password/{id}','userUpdatePassword')->name('user.password.update');
+    Route::get('user/change/password', 'userChangePassword')->name('user.change.password');
+    Route::put('user/update/password/{id}', 'userUpdatePassword')->name('user.password.update');
 });
 // HomePage Controller End
 
@@ -185,25 +207,25 @@ Route::controller(ProductsListsController::class)->group(function () {
 });
 
 //Cart
-Route::controller(CartController::class)->group(function(){
-    Route::get('/add-to-cart','addToCart')->name('addToCart');
-    Route::get('/view/cart/{id}','viewCart')->name('view.cart');    
-    Route::get('/delete/cart/{id}','deleteCart')->name('delete.cart');
-    Route::post('/add-to-cart-product/{id}','addToCartProduct')->name('addToCartProduct');
-    Route::post('/update-cart-product/{id}','updataCart')->name('update.cart');
-    Route::post('/add/to/cart/product','cartProduct')->name('cartProduct');
+Route::controller(CartController::class)->group(function () {
+    Route::get('/add-to-cart', 'addToCart')->name('addToCart');
+    Route::get('/view/cart/{id}', 'viewCart')->name('view.cart');
+    Route::get('/delete/cart/{id}', 'deleteCart')->name('delete.cart');
+    Route::post('/add-to-cart-product/{id}', 'addToCartProduct')->name('addToCartProduct');
+    Route::post('/update-cart-product/{id}', 'updataCart')->name('update.cart');
+    Route::post('/add/to/cart/product', 'cartProduct')->name('cartProduct');
 
     // wish lists
-    Route::get('add-wish-lists','addToWishts')->name('addToWishts');
-    Route::get('view-wish-lists/{id}','viewToWishts')->name('viewToWishts');
+    Route::get('add-wish-lists', 'addToWishts')->name('addToWishts');
+    Route::get('view-wish-lists/{id}', 'viewToWishts')->name('viewToWishts');
 
     // cupon
-    Route::post('cupon/offer','offer')->name('cupon.offer');
+    Route::post('cupon/offer', 'offer')->name('cupon.offer');
 
     // checkout
-    Route::post('/checkout','checkout')->name('checkout')->middleware(['auth']);
+    Route::post('/checkout', 'checkout')->name('checkout')->middleware(['auth']);
     //stripe payement
-        Route::post('/payment-with-stripe','stripe')->name('paymentWithStripe');
+    Route::post('/payment-with-stripe', 'stripe')->name('paymentWithStripe');
 
     //order
     Route::post('/place-order', 'placeOrder')->name('placeOrder');
