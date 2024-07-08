@@ -24,7 +24,7 @@
                         <div class="table-responsive">
                             <div style="padding: 12px 0">
                                 {{-- <a href="{{route('show.pdf')}}" class="btn btn-primary">PDF</a> --}}
-                                <a href="{{ route('export.execl') }}" class="btn btn-success">Excel</a>
+                                <a href="{{ route('export.excel') }}" class="btn btn-success">Excel</a>
                             </div>
                             <table id="" class="table table-striped table-bordered">
                                 <thead>

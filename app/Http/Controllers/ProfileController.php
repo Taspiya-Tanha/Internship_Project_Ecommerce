@@ -66,7 +66,7 @@ class ProfileController extends Controller
     {
         return Socialite::driver('google')->redirect();
     }
-    public function redriect()
+    public function redirect()
     {
         $user = Socialite::driver('google')
             ->stateless()

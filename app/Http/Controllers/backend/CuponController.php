@@ -10,16 +10,16 @@ use App\Models\CategoryCupon;
 use App\Models\Category;
 use App\Models\Cupon;
 
-class CuponController extends Controller
+class CouponController extends Controller
 {
-   
+
     /*
     * display all cupon page
     */
     public function allCupon()
     {
         $cupons = Cupon::latest()->get();
-        return view('backend.allCupon.view',compact('cupons'));
+        return view('backend.allCupon.view', compact('cupons'));
     }
 
     public function createAllCupon()
@@ -51,7 +51,7 @@ class CuponController extends Controller
         return view('backend.allCupon.edit', compact('cupon'));
     }
 
-    public function updateAllCupon(Request $request,$id)
+    public function updateAllCupon(Request $request, $id)
     {
         $store = Cupon::find($id);
         $store->name = $request->Cupon_Name;
