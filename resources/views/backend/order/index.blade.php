@@ -1,6 +1,4 @@
 @extends('backend.layouts.app')
-
-
 @section('content')
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -16,6 +14,15 @@
     </div>
     <!--end breadcrumb-->
 
+    <!-- Date Range Filter-->
+    <div class="row mb-4">
+        <div class="col-lg-4">
+            <input type="text" id="daterange" class="form-control" placeholder="Select Date Range" />
+        </div>
+        <div class="col-lg-4">
+            <button class="btn btn-primary" id="filter-btn">Filter</button>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-lg-12">
@@ -73,4 +80,21 @@
             </div>
         </div>
     </div>
+
+    @push('script')
+        <script>
+            $(function() {
+                $('#daterange').daterangepicker({
+                    locale: {
+                        format: 'YYYY-MM-DD'
+                    }
+                });
+
+                $('#filter-btn').on('click', function() {
+                    var dateRange = $('#daterange').val();
+                    window.location.href = "{{ route('orders.index') }}?daterange=" + dateRange;
+                });
+            });
+        </script>
+    @endpush
 @endsection

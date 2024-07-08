@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -13,11 +14,28 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        $orders = Order::latest()->get();
+        $query = Order::query();
+
+        if ($request->has('daterange')) {
+            // dd($request->daterange);
+            $dates = explode(' - ', $request->daterange);
+            // dd($dates);
+            $startDate = Carbon::createFromFormat('Y-m-d', $dates[0])->startOfDay();
+            // dd($startDate);
+            $endDate = Carbon::createFromFormat('Y-m-d', $dates[1])->endOfDay();
+            // dd($endDate);
+            $query->whereBetween('created_at', [$startDate, $endDate]);
+        }
+
+        $orders = $query->get();
+        dd($orders);
+
         return view('backend.order.index', compact('orders'));
     }
+
 
     /**
      * Show the form for creating a new resource.
