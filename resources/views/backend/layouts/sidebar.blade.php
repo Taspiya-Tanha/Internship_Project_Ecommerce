@@ -33,49 +33,62 @@
                 <li> <a href="{{ route('all.category') }}"><i class="bx bx-right-arrow-alt"></i>All Category </a>
                 </li>
                 {{-- <li> <a href="{{ route('create.subCategory') }}"><i class="bx bx-right-arrow-alt"></i>Add Sub Category</a> --}}
-                </li>
-                <li> <a href="{{ route('all.subCategory') }}"><i class="bx bx-right-arrow-alt"></i>All Sub-Category</a>
-                </li>
-            </ul>
         </li>
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class="bx bx-category"></i>
-                </div>
-                <div class="menu-title">Product Managment</div>
-            </a>
-            <ul>
-                <li> <a href="{{ route('create.product') }}"><i class="bx bx-right-arrow-alt"></i>Add Product</a>
-                </li>
-                <li> <a href="{{ route('all.Products') }}"><i class="bx bx-right-arrow-alt"></i>All Products</a>
-                </li>
-            </ul>
+        <li> <a href="{{ route('all.subCategory') }}"><i class="bx bx-right-arrow-alt"></i>All Sub-Category</a>
         </li>
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class="bx bx-category"></i>
-                </div>
-                <div class="menu-title">Recycle Bin</div>
-            </a>
-            <ul>
-                <li> <a href="{{ route('all.restore') }}"><i class="bx bx-right-arrow-alt"></i>Product Recycle</a>
-                </li>
+    </ul>
+    </li>
+    <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon"><i class="bx bx-category"></i>
+            </div>
+            <div class="menu-title">Product Managment</div>
+        </a>
+        <ul>
+            <li> <a href="{{ route('create.product') }}"><i class="bx bx-right-arrow-alt"></i>Add Product</a>
+            </li>
+            <li> <a href="{{ route('all.Products') }}"><i class="bx bx-right-arrow-alt"></i>All Products</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon"><i class="bx bx-category"></i>
+            </div>
+            <div class="menu-title">Recycle Bin</div>
+        </a>
+        <ul>
+            <li> <a href="{{ route('all.restore') }}"><i class="bx bx-right-arrow-alt"></i>Product Recycle</a>
+            </li>
 
-            </ul>
-        </li>
+        </ul>
+    </li>
 
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class="bx bx-category"></i>
-                </div>
-                <div class="menu-title">Cupon</div>
-            </a>
-            <ul>
-                <li> <a href="{{ route('all.product.cupon') }}"><i class="bx bx-right-arrow-alt"></i>Cupon</a>
-                </li>
+    <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon"><i class="bx bx-category"></i>
+            </div>
+            <div class="menu-title">Cupon</div>
+        </a>
+        <ul>
+            <li> <a href="{{ route('all.product.cupon') }}"><i class="bx bx-right-arrow-alt"></i>Cupon</a>
+            </li>
 
-            </ul>
-        </li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon"><i class="bx bx-category"></i>
+            </div>
+            <div class="menu-title">Orders</div>
+        </a>
+        <ul>
+            <li> <a href="{{ route('orders.index') }}"><i class="bx bx-right-arrow-alt"></i>Order List</a>
+            </li>
+
+        </ul>
+    </li>
 
     </ul>
     <!--end navigation-->
