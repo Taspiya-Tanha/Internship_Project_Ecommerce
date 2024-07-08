@@ -16,7 +16,7 @@ use App\Models\DiscountPrice;
 use App\Models\ProductWishlist;
 use App\Http\Controllers\Controller;
 use App\Models\OrderItems;
-use App\Models\Orders;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -373,7 +373,7 @@ class CartController extends Controller
         'phone' => $request->phone,
       ];
 
-      $order = Orders::create($orderInformation);
+      $order = Order::create($orderInformation);
 
       $allCartData = Cart::with('product')
         ->where('user_id', Auth::user()->id)

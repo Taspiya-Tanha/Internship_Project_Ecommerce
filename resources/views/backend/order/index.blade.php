@@ -16,64 +16,58 @@
     </div>
     <!--end breadcrumb-->
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="example2" class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Total Amount</th>
-                                        <th>Billing Address</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($orders as $key => $item)
-                                        <tr>
-                                            <td>{{ ++$key }}</td>
-                                            <td>{{ $item->fname }}</td>
-                                            <td>{{ $item->email }}</td>
-                                            <td>{{ $item->phone }}</td>
-                                            <td>{{ $item->total_amount }}</td>
-                                            <td>{{ $item->billing_address }}</td>
-                                            <td>
-                                                <a class="btn btn-success btn-sm"
-                                                    href="{{ route('orders.show', $item->id) }}">View</a>
-                                                <a class="btn btn-primary btn-sm"
-                                                    href="{{ route('orders.edit', $item->id) }}">Edit</a>
-                                                <button class="btn btn-sm btn-danger button">Delete</button>
-                                                <form action="{{ route('orders.destroy', $item->id) }}" method="post">
-                                                    @csrf
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="5" class="text-center">No Category</td>
-                                        </tr>
-                                    @endforelse
 
-                                </tbody>
-                                <tfoot>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example2" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Total Amount</th>
+                                    <th>Billing Address</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($orders as $key => $item)
                                     <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Total Amount</th>
-                                        <th>Billing Address</th>
-                                        <th>Action</th>
+                                        <td>{{ ++$key }}</td>
+                                        <td>{{ $item->fname }}</td>
+                                        <td>{{ $item->email }}</td>
+                                        <td>{{ $item->phone }}</td>
+                                        <td>{{ $item->total_amount }}</td>
+                                        <td>{{ $item->billing_address }}</td>
+                                        <td>
+                                            <a class="btn btn-success btn-sm"
+                                                href="{{ route('orders.show', $item->id) }}">View</a>
+                                            <button class="btn btn-sm btn-danger button">Delete</button>
+                                        </td>
                                     </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center">No Category</td>
+                                    </tr>
+                                @endforelse
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Total Amount</th>
+                                    <th>Billing Address</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>

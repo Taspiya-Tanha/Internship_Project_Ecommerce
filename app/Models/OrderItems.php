@@ -9,9 +9,9 @@ class OrderItems extends Model
 {
   use HasFactory;
 
-  public function orders()
+  public function order()
   {
-    $this->belongsTo(Orders::class);
+    $this->belongsTo(Order::class);
   }
 
   public function user()
@@ -21,7 +21,7 @@ class OrderItems extends Model
 
   public function product()
   {
-    $this->belongsTo(Product::class);
+    return $this->belongsTo(Product::class);
   }
 
   public function productPrice()
