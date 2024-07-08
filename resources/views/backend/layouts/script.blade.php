@@ -7,6 +7,9 @@
 <script src="{{ asset('backend/assets/js/jquery.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<!-- Include Date Range Picker JS -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>s
 <script src="{{ asset('backend/assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
 <script src="{{ asset('backend/assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
 <script src="{{ asset('backend/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
@@ -43,14 +46,16 @@
 </script>
 {{-- live search  --}}
 <Script>
-    $(document).ready(function(){
-        $('#search').on('keyup', function(){
+    $(document).ready(function() {
+        $('#search').on('keyup', function() {
             var value = $(this).val();
             $.ajax({
-                url:"{{ route('dashboard') }}",
+                url: "{{ route('dashboard') }}",
                 type: "GET",
-                data: {'title':value},
-                success:function(data){
+                data: {
+                    'title': value
+                },
+                success: function(data) {
                     $('#productList').html(data);
                 }
             });
@@ -88,7 +93,9 @@
         }
     @endif
 </script>
-<script src="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Custom-Tags-Input-Select-Box-selectize-js/selectize.js"></script>
+<script
+    src="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Custom-Tags-Input-Select-Box-selectize-js/selectize.js">
+</script>
 
 <script>
     $('#product_tag').selectize({
@@ -101,7 +108,6 @@
             }
         }
     })
-
 </script>
 @notifyJs
 
