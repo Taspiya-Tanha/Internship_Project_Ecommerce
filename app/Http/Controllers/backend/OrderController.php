@@ -31,7 +31,6 @@ class OrderController extends Controller
         }
 
         $orders = $query->get();
-        dd($orders);
 
         return view('backend.order.index', compact('orders'));
     }

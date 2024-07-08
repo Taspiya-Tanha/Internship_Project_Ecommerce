@@ -21,6 +21,7 @@
         </div>
         <div class="col-lg-4">
             <button class="btn btn-primary" id="filter-btn">Filter</button>
+            <a href="{{ route('orders.index') }}" class="btn btn-primary" id="filter-btn">Reset</a>
         </div>
     </div>
 
@@ -85,9 +86,20 @@
         <script>
             $(function() {
                 $('#daterange').daterangepicker({
+                    autoUpdateInput: false, 
                     locale: {
-                        format: 'YYYY-MM-DD'
+                        format: 'YYYY-MM-DD',
+                        cancelLabel: 'Clear'
                     }
+                });
+
+                $('#daterange').on('apply.daterangepicker', function(ev, picker) {
+                    $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format(
+                        'YYYY-MM-DD'));
+                });
+
+                $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
+                    $(this).val('');
                 });
 
                 $('#filter-btn').on('click', function() {
