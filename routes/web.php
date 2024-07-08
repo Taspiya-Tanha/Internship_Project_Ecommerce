@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\backend\CuponController;
+use App\Http\Controllers\backend\CouponController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\CategoryController;
@@ -79,7 +79,7 @@ Route::group(['middleware' => ['auth', 'role:admin|manager|editor|seller']], fun
         // print pdf
         Route::get('/show-product-pdf', 'showPdf')->name('show.pdf');
 
-        Route::get('prdouct/export/', 'export')->name('export.execl');
+        Route::get('product/export/', 'export')->name('export.excel');
     });
 
     Route::controller(RecycleBinController::class)->group(function () {
@@ -88,7 +88,7 @@ Route::group(['middleware' => ['auth', 'role:admin|manager|editor|seller']], fun
         Route::post('/permanent/delete/product/{id}', 'deleteProduct')->name('permanent.delete.product');
     });
 
-    Route::controller(CuponController::class)->group(function () {
+    Route::controller(CouponController::class)->group(function () {
         // All Cupon
         Route::get('/all/product/cupon', 'allCupon')->name('all.product.cupon');
         Route::get('/create/all/cupon', 'createAllCupon')->name('create.all.cupon');
@@ -120,7 +120,7 @@ Route::controller(AdminProfileController::class)
 
 // google login end
 Route::get('/google/login', [ProfileController::class, 'login'])->name('google.login');
-Route::get('/google/redriect', [ProfileController::class, 'redriect'])->name('google.redriect');
+Route::get('/google/redirect', [ProfileController::class, 'redirect'])->name('google.redirect');
 // google login end
 
 
