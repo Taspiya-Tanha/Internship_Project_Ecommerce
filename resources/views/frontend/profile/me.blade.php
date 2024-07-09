@@ -53,6 +53,14 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="{{ route('profile.myOrder') }}">
+                                            <div>
+                                                <i class="feather-shopping-bag"></i>
+                                                <p>My Order</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="{{ route('view.cart', Auth::user()->id) }}">
                                             <div>
                                                 <i class="feather-shopping-bag"></i>

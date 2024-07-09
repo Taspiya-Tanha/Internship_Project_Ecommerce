@@ -48,11 +48,11 @@
                                 <a href="#">Profile <i class="fi-rs-angle-down"></i></a>
                                 <ul class="has-submenu">
                                     @if (Auth::user()->roles[0]->name == 'buyer')
-                                    <li><a href="{{ route('profile.create') }}">My Profile</a></li>
-                                    <li><a href="{{ route('odrer.create') }}">Orders</a></li>
-                                    <li><a href="{{ route('cart.create') }}">Cart</a></li>
-                                    <li><a href="{{ route('wisih.create') }}">Wishlist</a></li>
-                                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                                        <li><a href="{{ route('profile.me') }}">My Profile</a></li>
+                                        <li><a href="{{ route('odrer.create') }}">Orders</a></li>
+                                        <li><a href="{{ route('cart.create') }}">Cart</a></li>
+                                        <li><a href="{{ route('wisih.create') }}">Wishlist</a></li>
+                                        <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                                     @else
                                     @endif
                                     <li>
@@ -67,11 +67,14 @@
                         @endauth
                         <li>
                             @if (Auth::check())
-                            <a class="popup-toggle"><img style="height: 30px; width:30px;" class="rounded-circle" src="{{ Auth::user()->image == null ? 'https://api.dicebear.com/5.x/initials/svg?seed=Felix' : Auth::user()->image }}
-                                " alt="Profile Image"></a></li>
-                            @else
-                                <a class="popup-toggle"><i class="feather-user"></i>Login / Register</a></li>
-                            @endif
+                                <a class="popup-toggle"><img style="height: 30px; width:30px;" class="rounded-circle"
+                                        src="{{ Auth::user()->image == null ? 'https://api.dicebear.com/5.x/initials/svg?seed=Felix' : Auth::user()->image }}
+                                "
+                                        alt="Profile Image"></a>
+                        </li>
+                    @else
+                        <a class="popup-toggle"><i class="feather-user"></i>Login / Register</a></li>
+                        @endif
                         <li>
                     </ul>
                 </nav>

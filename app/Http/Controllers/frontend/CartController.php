@@ -15,11 +15,13 @@ use Illuminate\Http\Request;
 use App\Models\DiscountPrice;
 use App\Models\ProductWishlist;
 use App\Http\Controllers\Controller;
-use App\Models\OrderItems;
+use App\Models\OrderItem;
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
@@ -363,14 +365,16 @@ class CartController extends Controller
     if (Auth::check()) {
 
       $orderInformation = [
+        'invoice_no' => "#Order-" . Str::upper(Str::random(3)) . Carbon::now()->format('dmYHis'),
+        'user_id' => Auth::user()->id,
+        'fname' => $request->fname,
+        'email' => $request->email,
+        'phone' => $request->phone,
         'city' => $request->city,
         'country' => $request->country,
         'billing_address' => $request->billing_address,
         'zipcode' => $request->zipcode,
         'total_amount' => $request->total_ammount,
-        'email' => $request->email,
-        'fname' => $request->fname,
-        'phone' => $request->phone,
       ];
 
       $order = Order::create($orderInformation);
@@ -387,9 +391,8 @@ class CartController extends Controller
         foreach ($allCartData as $item) {
           array_push($cartIds, $item->id);
 
-          $orderItem = new OrderItems;
+          $orderItem = new OrderItem;
           $orderItem->order_id = $order->id;
-          $orderItem->user_id = Auth::user()->id;
           $orderItem->product_id = $item->product_id;
           $orderItem->product_price = $item->product_price;
           $orderItem->product_qty = $item->product_qty;
@@ -416,7 +419,8 @@ class CartController extends Controller
           Cart::destroy($cartIds);
           db::commit();
 
-          return redirect()->route('home.create')->with('order_success', true);
+          // return redirect()->route('home.create')->with('order_success', true);
+          return redirect()->route('successOrderMsg')->with('order_success', true);
         } else {
           db::rollBack();
           return response()->json(['error', 'Order Placement Failed'], 500);
@@ -430,6 +434,11 @@ class CartController extends Controller
         'error' => 'please login first',
       ]);
     }
+  }
+
+  public function successOrderMsg()
+  {
+    return view('frontend.payment-gateway.success-order-msg');
   }
 
   public function stripe(Request $request)

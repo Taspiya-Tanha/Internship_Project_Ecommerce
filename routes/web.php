@@ -164,8 +164,15 @@ Route::controller(HomePageController::class)->group(function () {
     Route::get('/store/single', 'createSingleShopStore')->name('store.single.create');
     // account page
     Route::get('/account/page', 'createAccountPage')->name('create.account');
+    /*
+    |--------------------------------------------------------------------------
+    | Profile route
+    |--------------------------------------------------------------------------
+    */
     // profile page
-    Route::get('/profile/page', 'createProfilePage')->name('profile.create');
+    Route::get('/profile/me', 'profileMe')->name('profile.me');
+    // profile page
+    Route::get('/profile/my-order', 'profileMyOrder')->name('profile.myOrder');
     // password page
     Route::get('/password/page', 'createPasswordPage')->name('password.create');
     // odrer page
@@ -229,6 +236,7 @@ Route::controller(CartController::class)->group(function () {
 
     //order
     Route::post('/place-order', 'placeOrder')->name('placeOrder');
+    Route::get('/success-order-msg', 'successOrderMsg')->name('successOrderMsg');
 });
 
 // fortend all controller end

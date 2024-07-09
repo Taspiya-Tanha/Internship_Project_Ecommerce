@@ -15,6 +15,8 @@ return new class extends Migration
   {
     Schema::create('orders', function (Blueprint $table) {
       $table->id();
+      $table->string('invoice_no');
+      $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
       $table->string('fname');
       $table->string('email');
       $table->string('country');

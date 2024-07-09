@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -45,21 +45,17 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user->assignRole('buyer'));
-        if(Auth::user()->getRoleNames()->first() == 'admin'){
+        if (Auth::user()->getRoleNames()->first() == 'admin') {
 
             return redirect()->route('dashboard');
-        }elseif(Auth::user()->getRoleNames()->first() == 'manager'){
+        } elseif (Auth::user()->getRoleNames()->first() == 'manager') {
             return redirect()->route('dashboard');
-            
-        }elseif(Auth::user()->getRoleNames()->first() == 'editor'){
+        } elseif (Auth::user()->getRoleNames()->first() == 'editor') {
             return redirect()->route('dashboard');
-            
-        }elseif(Auth::user()->getRoleNames()->first() == 'seller'){
+        } elseif (Auth::user()->getRoleNames()->first() == 'seller') {
             return redirect()->route('dashboard');
-            
-        }else{
-            return redirect()->route('profile.create');
-
+        } else {
+            return redirect()->route('profile.me');
         }
     }
 }
