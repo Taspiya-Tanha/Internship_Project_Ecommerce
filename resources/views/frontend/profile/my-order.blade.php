@@ -17,32 +17,41 @@
                                 <thead>
                                     <tr class="table-head">
                                         <th>#</th>
-                                        <th>Product Image</th>
-                                        <th>Product Name</th>
-                                        <th>Product Qty</th>
-                                        <th>Price</th>
+                                        <th>Date & Time</th>
+                                        <th>Invoice No.</th>
+                                        <th>Total Amount</th>
+                                        <th>Billing Address</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $iteration = 1; ?>
-                                    @forelse ($orders as $order)
-                                        @foreach ($order->orderItems as $item)
-                                            <tr class="table-head">
-                                                <td>{{ $iteration++ }} </td>
-                                                <td>
-                                                    @if ($item->product)
-                                                        <img src="{{ $item->product->image_url }}"
-                                                            alt="{{ $item->product->title }}"
-                                                            style="width: 75px; height: 60px;">
-                                                    @else
-                                                        <span>Product not found</span>
-                                                    @endif
-                                                </td>
-                                                <td>{{ $item->product->title }}</td>
-                                                <td>{{ $item->product_qty }}</td>
-                                                <td>${{ $item->price }}</td>
-                                            </tr>
-                                        @endforeach
+                                    @forelse ($orders as $item)
+                                        {{-- @foreach ($order->orderItems as $item) --}}
+                                        <tr class="table-head">
+                                            <td>{{ $iteration++ }} </td>
+                                            <td>{{ $item->created_at }} </td>
+                                            <td>
+                                                <a href="{{ route('profile.myOrderView', $item->id) }}">{{ $item->invoice_no }}
+                                                </a>
+                                            </td>
+                                            {{-- <td>
+                                                @if ($item->product)
+                                                    <img src="{{ $item->product->image_url }}"
+                                                        alt="{{ $item->product->title }}"
+                                                        style="width: 75px; height: 60px;">
+                                                @else
+                                                    <span>Product not found</span>
+                                                @endif
+                                            </td> --}}
+                                            <td>{{ $item->total_amount }}</td>
+                                            <td>{{ $item->billing_address }}</td>
+                                            <td>{{ $item->status }}</td>
+                                            <td><a class="btn btn-sm btn-success" href="{{ route('profile.myOrderView', $item->id) }}">View
+                                                </a></td>
+                                        </tr>
+                                        {{-- @endforeach --}}
                                     @empty
                                         <tr>
                                             <td colspan="4" class="text-center">

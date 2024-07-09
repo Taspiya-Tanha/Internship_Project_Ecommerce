@@ -169,10 +169,9 @@ Route::controller(HomePageController::class)->group(function () {
     | Profile route
     |--------------------------------------------------------------------------
     */
-    // profile page
     Route::get('/profile/me', 'profileMe')->name('profile.me');
-    // profile page
     Route::get('/profile/my-order', 'profileMyOrder')->name('profile.myOrder');
+    Route::get('/profile/my-order/{id}', 'profileMyOrderView')->name('profile.myOrderView');
     // password page
     Route::get('/password/page', 'createPasswordPage')->name('password.create');
     // odrer page

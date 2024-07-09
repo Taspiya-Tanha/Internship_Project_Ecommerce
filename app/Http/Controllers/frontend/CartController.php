@@ -365,7 +365,7 @@ class CartController extends Controller
     if (Auth::check()) {
 
       $orderInformation = [
-        'invoice_no' => "#Order-" . Str::upper(Str::random(3)) . Carbon::now()->format('dmYHis'),
+        'invoice_no' => "#Order-" . Str::upper(Str::random(3)) . Carbon::now()->format('dmyHis'),
         'user_id' => Auth::user()->id,
         'fname' => $request->fname,
         'email' => $request->email,

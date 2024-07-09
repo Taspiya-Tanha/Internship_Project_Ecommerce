@@ -25,6 +25,7 @@ return new class extends Migration
       $table->string('zipcode')->nullable();
       $table->string('phone');
       $table->integer('total_amount')->default(0)->nullable();
+      $table->enum('status', ['Processing', 'Delivered'])->default('Processing')->nullable();
 
       $table->timestamps();
     });

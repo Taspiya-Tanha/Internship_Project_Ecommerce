@@ -10,6 +10,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -222,6 +223,13 @@ class HomePageController extends Controller
         $orders = Order::with(['orderItems.product'])->where('user_id', $id)->get();
         // dd($orders);
         return view('frontend.profile.my-order', compact('orders'));
+    }
+
+    public function profileMyOrderView($id)
+    {
+        $orderItems = OrderItem::where('order_id', $id)->get();
+        // dd($orders);
+        return view('frontend.profile.my-order-view', compact('orderItems'));
     }
 
     public function userChangePassword()

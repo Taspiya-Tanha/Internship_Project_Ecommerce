@@ -25,8 +25,7 @@
                                 </thead>
                                 <tbody>
                                     <?php $iteration = 1; ?>
-                                    @forelse ($orders as $order)
-                                        @foreach ($order->orderItems as $item)
+                                        @foreach ($orderItems as $item)
                                             <tr class="table-head">
                                                 <td>{{ $iteration++ }} </td>
                                                 <td>
@@ -43,13 +42,6 @@
                                                 <td>${{ $item->price }}</td>
                                             </tr>
                                         @endforeach
-                                    @empty
-                                        <tr>
-                                            <td colspan="4" class="text-center">
-                                                <h4>NO cart item here...</h4>
-                                            </td>
-                                        </tr>
-                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
