@@ -3,7 +3,7 @@
         ->limit(6)
         ->with('subCategory')
         ->get(['id', 'cat_name', 'cat_slug', 'image_url']);
-    
+
     use App\Models\Cart;
     $authUser = Auth::user();
     if ($authUser != null) {
@@ -52,9 +52,10 @@
                                     <a href="#">Profile <i class="fi-rs-angle-down"></i></a>
                                     <ul class="has-submenu">
                                         @if (Auth::user()->roles[0]->name == 'buyer')
-                                            <li><a href="{{ route('profile.create') }}">My Profile</a></li>
-                                            <li><a href="{{ route('view.cart',$authUser->id) }}">Cart</a></li>
-                                            <li><a href="{{ route('viewToWishts',$authUser->id) }}">Wishlist</a></li>
+                                            <li><a href="{{ route('profile.me') }}">My Profile</a></li>
+                                            <li><a href="{{ route('profile.myOrder') }}">My Order</a></li>
+                                            <li><a href="{{ route('view.cart', $authUser->id) }}">Cart</a></li>
+                                            <li><a href="{{ route('viewToWishts', $authUser->id) }}">Wishlist</a></li>
                                         @else
                                             <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                                         @endif

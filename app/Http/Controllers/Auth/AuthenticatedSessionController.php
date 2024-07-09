@@ -28,21 +28,17 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-        if(Auth::user()->getRoleNames()->first() == 'admin'){
+        if (Auth::user()->getRoleNames()->first() == 'admin') {
 
             return redirect()->route('dashboard');
-        }elseif(Auth::user()->getRoleNames()->first() == 'manager'){
+        } elseif (Auth::user()->getRoleNames()->first() == 'manager') {
             return redirect()->route('dashboard');
-            
-        }elseif(Auth::user()->getRoleNames()->first() == 'editor'){
+        } elseif (Auth::user()->getRoleNames()->first() == 'editor') {
             return redirect()->route('dashboard');
-            
-        }elseif(Auth::user()->getRoleNames()->first() == 'seller'){
+        } elseif (Auth::user()->getRoleNames()->first() == 'seller') {
             return redirect()->route('dashboard');
-            
-        }else{
-            return redirect()->route('profile.create');
-
+        } else {
+            return redirect()->route('profile.me');
         }
         // return redirect()->intended(RouteServiceProvider::HOME);
     }

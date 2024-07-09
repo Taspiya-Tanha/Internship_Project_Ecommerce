@@ -15,6 +15,8 @@ return new class extends Migration
   {
     Schema::create('orders', function (Blueprint $table) {
       $table->id();
+      $table->string('invoice_no');
+      $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
       $table->string('fname');
       $table->string('email');
       $table->string('country');
@@ -23,6 +25,7 @@ return new class extends Migration
       $table->string('zipcode')->nullable();
       $table->string('phone');
       $table->integer('total_amount')->default(0)->nullable();
+      $table->enum('status', ['Processing', 'Delivered'])->default('Processing')->nullable();
 
       $table->timestamps();
     });

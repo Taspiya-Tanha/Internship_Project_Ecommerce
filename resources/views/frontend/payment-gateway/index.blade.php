@@ -174,7 +174,7 @@
                             <div class='form-row row'>
                                 <div class='col-xs-12 form-group card required'>
                                     <label class='control-label'>Card Number</label> <input autocomplete='off'
-                                        class='form-control card-number' size='20' type='text'>
+                                        class='form-control card-number' size='20' type='number' min="16">
                                 </div>
                             </div>
 
@@ -200,7 +200,7 @@
                         </div>
                     </div>
                     <div class="place-orders">
-                        <button class="btn btn-fill-out btn-block mt-30">Place Order</button>
+                        <button class="btn btn-fill-out btn-block mt-30">Place OrderF</button>
                     </div>
                 </div>
             </form>

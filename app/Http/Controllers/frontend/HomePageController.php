@@ -9,6 +9,8 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,12 +25,12 @@ class HomePageController extends Controller
             ->get();
 
 
-            // dd($products );
+        // dd($products );
 
         $banners = Product::where('banner', 1)
             ->limit(4)
             ->latest()
-            ->get(['id', 'title', 'image_url', 'description','slug_unique']);
+            ->get(['id', 'title', 'image_url', 'description', 'slug_unique']);
         $most_view = Product::where('trending', 1)
             ->with('category', 'productPrice')
             ->limit(3)
@@ -83,7 +85,7 @@ class HomePageController extends Controller
         $similarProduct = Product::limit(8)
             ->latest()
             ->get();
-           
+
         return view('frontend.productDetailsPage', compact('product', 'five', 'four', 'three', 'two', 'one', 'averageResult', 'authUser', 'similarProduct'));
     }
 
@@ -141,14 +143,14 @@ class HomePageController extends Controller
         $discount = $product->productPrice != null ? $product->productPrice->discount : 0;
         if ($discount != null) {
             $ammount = ($discount / $price) * 100;
-        }   
-        $result= 0;
-        if($discount == null)
-            $result= '00%';
-        else{
-             $result= ceil($ammount) . '%';
         }
-        return response(json_encode([$product,$five,$four,$three,$two,$one,$averageResult,$result]));
+        $result = 0;
+        if ($discount == null)
+            $result = '00%';
+        else {
+            $result = ceil($ammount) . '%';
+        }
+        return response(json_encode([$product, $five, $four, $three, $two, $one, $averageResult, $result]));
     }
     // display shop grid page
     public function createShopGrid()
@@ -204,19 +206,37 @@ class HomePageController extends Controller
         return view('frontend.account');
     }
 
-    // profile page
-    public function createProfilePage()
+    // profile : Me
+    public function profileMe()
     {
         $id = Auth::user()->id;
         $user = User::with('roles')->find($id);
-        return view('frontend.profile', compact('user'));
+        return view('frontend.profile.me', compact('user'));
+    }
+
+    // Profile : My Order
+    public function profileMyOrder()
+    {
+        $id = Auth::user()->id;
+        // $user = User::with('roles')->find($id);
+        // $orders = Order::with('orderItems')->where('user_id', $id)->get();
+        $orders = Order::with(['orderItems.product'])->where('user_id', $id)->get();
+        // dd($orders);
+        return view('frontend.profile.my-order', compact('orders'));
+    }
+
+    public function profileMyOrderView($id)
+    {
+        $orderItems = OrderItem::where('order_id', $id)->get();
+        // dd($orders);
+        return view('frontend.profile.my-order-view', compact('orderItems'));
     }
 
     public function userChangePassword()
     {
         $id = Auth::user()->id;
         $user = User::with('roles')->find($id);
-        return view('frontend.changePasswordUser',compact('user'));
+        return view('frontend.changePasswordUser', compact('user'));
     }
 
     public function userUpdatePassword(Request $request, $id)
@@ -230,8 +250,7 @@ class HomePageController extends Controller
             'confrim_password' => 'required|max:255|same:new_password',
         ]);
 
-        if(Hash::check($request->current_password, $oldPass))
-        {
+        if (Hash::check($request->current_password, $oldPass)) {
             $userData->password = Hash::make($request->new_password);
             $userData->save();
             $notification = [
@@ -241,7 +260,7 @@ class HomePageController extends Controller
             return redirect()
                 ->back()
                 ->with($notification);
-        }else{
+        } else {
             $notification = [
                 'message' => 'Current Password didnot match',
                 'alert-type' => 'error',
