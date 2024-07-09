@@ -86,7 +86,7 @@
         <script>
             $(function() {
                 $('#daterange').daterangepicker({
-                    autoUpdateInput: false, 
+                    autoUpdateInput: false,
                     locale: {
                         format: 'YYYY-MM-DD',
                         cancelLabel: 'Clear'
@@ -104,7 +104,11 @@
 
                 $('#filter-btn').on('click', function() {
                     var dateRange = $('#daterange').val();
-                    window.location.href = "{{ route('orders.index') }}?daterange=" + dateRange;
+                    if (dateRange != "") {
+                        window.location.href = "{{ route('orders.index') }}?daterange=" + dateRange;
+                    } else {
+                        // Show error message
+                    }
                 });
             });
         </script>
