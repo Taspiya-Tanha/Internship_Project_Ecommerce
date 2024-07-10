@@ -52,6 +52,15 @@
                 <div class="row">
                     <div class="col-lg-3 primary-sidebar sticky-sidebar">
 
+                        <!-- Price Filter -->
+                        <div class="sidebar-widget price_range range mb-25">
+                            <h5 class="section-title style-1 mb-20">Filter by Price</h5>
+                            <select id="price-filter" class="form-select">
+                                <option value="low_to_high">Low to High</option>
+                                <option value="high_to_low">High to Low</option>
+                            </select>
+                        </div>
+
                         <!--Categories -->
                         <div class="sidebar-widget price_range range mb-25">
                             <h5 class="section-title style-1 mb-20">Categories</h5>
@@ -85,8 +94,8 @@
                             </div>
                         </div>
                         <!-- Categories -->
-
                     </div>
+
                     <div class="col-lg-9 ">
                         <div class="product-filter-group left-filter-bar">
                             <div class="row">
@@ -97,14 +106,15 @@
                                         </ul>
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </div>
-                        <div class="row product-grid">
 
+                        <div class="row product-grid" id="product-list">
                             @forelse ($productLists as $item)
                                 <!-- Product Card -->
-                                <div class="col-xl-4 col-md-4 col-12 col-sm-6">
+                                <div class="col-xl-4 col-md-4 col-12 col-sm-6 product-item"
+                                    data-price="{{ $item->productPrice->price }}">
                                     <!-- Product box -->
                                     <div class="product-card wow animate__animated animate__fadeIn mb-25"
                                         data-wow-delay=".1s">
@@ -117,8 +127,10 @@
                                             </div>
                                             <div class="product-badge">
                                                 @php
-                                                    $price = $item->productPrice != null ? $item->productPrice->price : 0;
-                                                    $discount = $item->productPrice != null ? $item->productPrice->discount : 0;
+                                                    $price =
+                                                        $item->productPrice != null ? $item->productPrice->price : 0;
+                                                    $discount =
+                                                        $item->productPrice != null ? $item->productPrice->discount : 0;
                                                     if ($discount != null) {
                                                         $ammount = ($discount / $price) * 100;
                                                     }
@@ -144,11 +156,11 @@
                                                         $five = App\Models\Review::where('product_id', $item->id)
                                                             ->where('ratings', 5)
                                                             ->count();
-                                                        
+
                                                         $four = App\Models\Review::where('product_id', $item->id)
                                                             ->where('ratings', 4)
                                                             ->count();
-                                                        
+
                                                         $three = App\Models\Review::where('product_id', $item->id)
                                                             ->where('ratings', 3)
                                                             ->count();
@@ -158,8 +170,12 @@
                                                         $one = App\Models\Review::where('product_id', $item->id)
                                                             ->where('ratings', 1)
                                                             ->count();
-                                                        $totalCount = App\Models\Review::where('product_id', $item->id)->count();
-                                                        $totalRatings = $five * 5 + $four * 4 + $three * 3 + $two * 2 + $one * 1;
+                                                        $totalCount = App\Models\Review::where(
+                                                            'product_id',
+                                                            $item->id,
+                                                        )->count();
+                                                        $totalRatings =
+                                                            $five * 5 + $four * 4 + $three * 3 + $two * 2 + $one * 1;
                                                         $averageResult = 0;
                                                         if ($totalRatings > 0) {
                                                             $averageResult = ceil($totalRatings / $totalCount);
@@ -222,13 +238,13 @@
                                                 <a class="btn btn-primary addToCart" data-id="{{ $item->id }}"><i
                                                         class="feather-shopping-bag me-1"></i>Add</a>
                                                 <div class="product-details-inner">
-                                                    <a href="{{ route('product.details.create', $item->slug_unique) }}" class="product-btn"><i
-                                                            class="fi-rs-eye"></i></a>
+                                                    <a href="{{ route('product.details.create', $item->slug_unique) }}"
+                                                        class="product-btn"><i class="fi-rs-eye"></i></a>
                                                     <a aria-label="Quick view" class="product-btn quickModal"
                                                         data-bs-toggle="modal" data-id="{{ $item->id }}"
                                                         data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                                    <a aria-label="Add To Wishlist" class="product-btn addToWishLists" data-id="{{ $item->id }}"
-                                                       ><i class="fi-rs-heart"></i></a>
+                                                    <a aria-label="Add To Wishlist" class="product-btn addToWishLists"
+                                                        data-id="{{ $item->id }}"><i class="fi-rs-heart"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -259,6 +275,25 @@
     <!-- /Main -->
 
     @push('script')
+        {{-- Filter Price --}}
+        <script>
+            document.getElementById('price-filter').addEventListener('change', function() {
+                const filterValue = this.value;
+                const productList = document.getElementById('product-list');
+                const products = Array.from(productList.getElementsByClassName('product-item'));
+
+                if (filterValue === 'low_to_high') {
+                    products.sort((a, b) => parseFloat(a.getAttribute('data-price')) - parseFloat(b.getAttribute(
+                        'data-price')));
+                } else if (filterValue === 'high_to_low') {
+                    products.sort((a, b) => parseFloat(b.getAttribute('data-price')) - parseFloat(a.getAttribute(
+                        'data-price')));
+                }
+
+                products.forEach(product => productList.appendChild(product));
+            });
+        </script>
+
         <script>
             let modalTitle = $('#quickViewModal .title-detail')
             let sliderParent = $('#quickViewModal .product-image-slider')

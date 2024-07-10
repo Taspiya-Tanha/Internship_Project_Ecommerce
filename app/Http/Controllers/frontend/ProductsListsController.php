@@ -24,6 +24,7 @@ class ProductsListsController extends Controller
         $count = $productLists->count();
         return view('frontend.shopGrid', compact('category', 'productLists', 'count'));
     }
+    
     public function subProduct($slug)
     {
         $subCategory = SubCategory::where('sub_slug', $slug)
