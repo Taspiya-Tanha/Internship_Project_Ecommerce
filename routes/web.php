@@ -31,8 +31,8 @@ Route::middleware('auth')->group(function () {
 | Backend Controller Start
 |--------------------------------------------------------------------------
 */
-// dashboard controller
 Route::group(['middleware' => ['auth', 'role:admin|manager|editor|seller']], function () {
+    // dashboard controller
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'create')->name('dashboard');
     });

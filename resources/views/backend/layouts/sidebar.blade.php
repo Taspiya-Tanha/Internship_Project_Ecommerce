@@ -90,6 +90,19 @@
         </ul>
     </li>
 
+    <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon"><i class="bx bx-category"></i>
+            </div>
+            <div class="menu-title">Delivery</div>
+        </a>
+        <ul>
+            <li> <a href="{{ route('orders.index') }}"><i class="bx bx-right-arrow-alt"></i>Order List</a>
+            </li>
+
+        </ul>
+    </li>
+
     </ul>
     <!--end navigation-->
 </div>
