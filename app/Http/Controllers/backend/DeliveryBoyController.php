@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DeliveryBoyController extends Controller
 {
@@ -37,7 +38,33 @@ class DeliveryBoyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:32',
+            'email' => 'required|string|email|unique:users',
+            'phone' => 'required',
+            'address' => 'required',
+            'nid' => 'required',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'nid' => $request->nid,
+        ]);
+
+        $user->type = 'Delivery-Boy';
+        $user->save();
+
+        $notification = [
+            'message' => 'Delivery Boy Successfully Created!',
+            'alert-type' => 'success',
+        ];
+
+        return redirect()->route('delivery-boy.index')->with($notification);
     }
 
     /**
