@@ -26,7 +26,7 @@ class DeliveryBoyController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.delivery-boy.create');
     }
 
     /**

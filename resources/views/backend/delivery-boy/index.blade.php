@@ -37,8 +37,8 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
-                                    <th>Total Amount</th>
-                                    <th>Billing Address</th>
+                                    <th>Address</th>
+                                    <th>NID</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -70,8 +70,8 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
-                                    <th>Total Amount</th>
-                                    <th>Billing Address</th>
+                                    <th>Addres</th>
+                                    <th>NID</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
