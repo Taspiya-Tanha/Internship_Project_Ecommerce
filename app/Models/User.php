@@ -20,6 +20,9 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name',
+        'phone',
+        'address',
+        'nid',
         'email',
         'password',
     ];
@@ -47,4 +50,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Product::class);
     }
-}                 
+}

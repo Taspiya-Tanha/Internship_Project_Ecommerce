@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -20,13 +21,9 @@ class OrderController extends Controller
         $query = Order::query();
 
         if ($request->has('daterange')) {
-            // dd($request->daterange);
             $dates = explode(' - ', $request->daterange);
-            // dd($dates);
             $startDate = Carbon::createFromFormat('Y-m-d', $dates[0])->startOfDay();
-            // dd($startDate);
             $endDate = Carbon::createFromFormat('Y-m-d', $dates[1])->endOfDay();
-            // dd($endDate);
             $query->whereBetween('created_at', [$startDate, $endDate]);
         }
 
@@ -101,5 +98,30 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function orderAssignCreate($id)
+    {
+        $order = Order::find($id);
+        $deliveryBoy = User::where('type', 'delivery-boy')->get();
+        return view('backend.order.assign', compact('order', 'deliveryBoy'));
+    }
+
+    public function orderAssignStore(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required',
+        ]);
+
+        $order = Order::find($request->order_id);
+        $order->delivered_by = $request->user_id;
+        $order->status = "Delivered";
+        $order->save();
+
+        $notification = [
+            'message' => 'Delivery Boy Assign!',
+            'alert-type' => 'success',
+        ];
+        return redirect()->route('orders.index')->with($notification);
     }
 }

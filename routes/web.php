@@ -101,6 +101,9 @@ Route::group(['middleware' => ['auth', 'role:admin|manager|editor|seller']], fun
 
     // Order
     Route::resource('orders', OrderController::class);
+    Route::get('orders-assign/{id}', [OrderController::class, 'orderAssignCreate'])->name('orders.assign');
+    Route::post('orders-assign/store', [OrderController::class, 'orderAssignStore'])->name('orders.assign.store');
+
     // Delivery-Boy
     Route::resource('delivery-boy', DeliveryBoyController::class);
 });

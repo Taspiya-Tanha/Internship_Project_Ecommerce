@@ -39,6 +39,8 @@
                                     <th>Phone</th>
                                     <th>Total Amount</th>
                                     <th>Billing Address</th>
+                                    <th>Status</th>
+                                    <th>DeliverdBy</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -51,7 +53,11 @@
                                         <td>{{ $item->phone }}</td>
                                         <td>{{ $item->total_amount }}</td>
                                         <td>{{ $item->billing_address }}</td>
+                                        <td>{{ $item->status }}</td>
+                                        <td>{{ optional($item->user)->name ?? '-' }}</td>
                                         <td>
+                                            <a class="btn btn-info btn-sm"
+                                                href="{{ route('orders.assign', $item->id) }}">Assign</a>
                                             <a class="btn btn-success btn-sm"
                                                 href="{{ route('orders.show', $item->id) }}">View</a>
                                             <button class="btn btn-sm btn-danger button">Delete</button>
@@ -72,6 +78,7 @@
                                     <th>Phone</th>
                                     <th>Total Amount</th>
                                     <th>Billing Address</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
