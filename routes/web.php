@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\backend\DeliveryBoyController;
 use App\Http\Controllers\backend\CouponController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\backend\ProductController;
@@ -89,7 +90,7 @@ Route::group(['middleware' => ['auth', 'role:admin|manager|editor|seller']], fun
     });
 
     Route::controller(CouponController::class)->group(function () {
-        // All Cupon
+        // All Coupon
         Route::get('/all/product/cupon', 'allCupon')->name('all.product.cupon');
         Route::get('/create/all/cupon', 'createAllCupon')->name('create.all.cupon');
         Route::post('/store/all/cupon', 'storeAllCupon')->name('store.all.cupon');
@@ -98,9 +99,10 @@ Route::group(['middleware' => ['auth', 'role:admin|manager|editor|seller']], fun
         Route::post('/delete/all/cupon/{id}', 'deleteAllCupon')->name('delete.all.cupon');
     });
 
-    Route::controller(OrderController::class)->group(function () {
-        Route::resource('orders', OrderController::class);
-    });
+    // Order
+    Route::resource('orders', OrderController::class);
+    // Delivery-Boy
+    Route::resource('delivery-boy', DeliveryBoyController::class);
 });
 
 Route::controller(AdminProfileController::class)
@@ -115,8 +117,6 @@ Route::controller(AdminProfileController::class)
     })
     ->middleware(['auth', 'verified']);
 // profile controller end
-
-// backend controller end
 
 // google login end
 Route::get('/google/login', [ProfileController::class, 'login'])->name('google.login');

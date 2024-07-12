@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class DeliveryController extends Controller
+class DeliveryBoyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,8 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        //
+        $deliveryBoys = User::where('type', 'Delivery-Boy')->get();
+        return view('backend.delivery-boy.index', compact('deliveryBoys'));
     }
 
     /**

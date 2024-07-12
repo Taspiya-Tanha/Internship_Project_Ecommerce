@@ -94,12 +94,13 @@
         <a href="javascript:;" class="has-arrow">
             <div class="parent-icon"><i class="bx bx-category"></i>
             </div>
-            <div class="menu-title">Delivery</div>
+            <div class="menu-title">Delivery-Boy</div>
         </a>
         <ul>
-            <li> <a href="{{ route('orders.index') }}"><i class="bx bx-right-arrow-alt"></i>Order List</a>
+            <li> <a href="{{ route('delivery-boy.index') }}"><i class="bx bx-right-arrow-alt"></i>List</a>
             </li>
-
+            <li> <a href="{{ route('delivery-boy.create') }}"><i class="bx bx-right-arrow-alt"></i>Create</a>
+            </li>
         </ul>
     </li>
 
