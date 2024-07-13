@@ -7,7 +7,7 @@
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Delivery Boy List</li>
+                    <li class="breadcrumb-item active" aria-current="page">Delivery Person List</li>
                 </ol>
             </nav>
         </div>
@@ -52,7 +52,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="text-center">No Delivery Boys Found</td>
+                                        <td colspan="7" class="text-center">No Delivery Persons Found</td>
                                     </tr>
                                 @endforelse
 

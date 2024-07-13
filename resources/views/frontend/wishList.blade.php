@@ -47,7 +47,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="orders.html" >
+                                        <a href="{{ route('profile.myOrder') }}" >
                                             <div>
                                                 <i class="feather-shopping-bag"></i>
                                                 <p>Orders</p>

@@ -119,7 +119,7 @@ class OrderController extends Controller
         $order->save();
 
         $notification = [
-            'message' => 'Delivery Boy Assign!',
+            'message' => 'Delivery Person Assigned!',
             'alert-type' => 'success',
         ];
         return redirect()->route('orders.index')->with($notification);

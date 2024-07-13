@@ -12,7 +12,7 @@
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Order Assign to Delivery-Boy</li>
+                    <li class="breadcrumb-item active" aria-current="page">Order Assign to Delivery Person</li>
                 </ol>
             </nav>
         </div>
@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-9 text-secondary">
-                                <button class="btn btn-primary px-4">Sumbit</button>
+                                <button class="btn btn-primary px-4">Submit</button>
                             </div>
                         </div>
                     </form>
