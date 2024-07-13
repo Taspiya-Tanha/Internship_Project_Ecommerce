@@ -60,7 +60,7 @@ class DeliveryBoyController extends Controller
         $user->save();
 
         $notification = [
-            'message' => 'Delivery Boy Successfully Created!',
+            'message' => 'Delivery Person Successfully Created!',
             'alert-type' => 'success',
         ];
 

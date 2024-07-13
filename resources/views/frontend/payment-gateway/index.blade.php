@@ -200,7 +200,7 @@
                         </div>
                     </div>
                     <div class="place-orders">
-                        <button class="btn btn-fill-out btn-block mt-30">Place OrderF</button>
+                        <button class="btn btn-fill-out btn-block mt-30">Place Order</button>
                     </div>
                 </div>
             </form>

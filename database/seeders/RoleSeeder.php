@@ -9,22 +9,23 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RoleSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        $roles = [
-            'admin',
-            'manager',
-            'editor',
-            'seller',
-            'buyer',
-        ];
-        foreach($roles as $role){
-            Role::create(['name' => $role]);
-        }
+  /**
+   * Run the database seeds.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    $roles = [
+      'admin',
+      'manager',
+      'editor',
+      'seller',
+      'buyer',
+      'delivery-boy'
+    ];
+    foreach ($roles as $role) {
+      Role::create(['name' => $role]);
     }
+  }
 }
