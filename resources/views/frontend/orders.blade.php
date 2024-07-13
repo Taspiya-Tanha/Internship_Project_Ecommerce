@@ -47,7 +47,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="orders.html" class="active">
+                                        <a href="{{ route('profile.myOrder') }}" class="active">
                                             <div>
                                                 <img src="{{ asset('frontend/assets/img/icons/account-icon-03.png') }}" alt="Image">
                                                 <p>Orders</p>

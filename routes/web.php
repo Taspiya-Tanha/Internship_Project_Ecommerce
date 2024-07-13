@@ -178,7 +178,7 @@ Route::controller(HomePageController::class)->group(function () {
     // password page
     Route::get('/password/page', 'createPasswordPage')->name('password.create');
     // odrer page
-    Route::get('/odrer/page', 'createOdrerPage')->name('odrer.create');
+    Route::get('/odrer/page', 'profileMyOrder')->name('odrer.create');
     // address page
     Route::get('/address/page', 'createAddressPage')->name('address.create');
     // wisih list page

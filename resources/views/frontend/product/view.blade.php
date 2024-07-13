@@ -112,7 +112,7 @@
                                 <ul class="has-submenu">
                                     <li><a href="account.html">My Account</a></li>
                                     <li><a href="profile.html">Profile</a></li>
-                                    <li><a href="orders.html">Orders</a></li>
+                                    <li><a href="{{ route('profile.myOrder') }}">Orders</a></li>
                                     <li><a href="address-book.html">Address Book </a></li>
                                     <li><a href="wishlist.html">Wishlist</a></li>
                                     <li><a href="vendor.html">Vendor</a></li>
@@ -751,7 +751,7 @@
                     </div>
                     <div class="col-lg-6 col-md-7">
                         <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="orders.html">My Orders</a></li>
+                            <li><a href="{{ route('profile.myOrder') }}">My Orders</a></li>
                             <li><a href="javascript:;">Help</a></li>
                             <li><a href="javascript:;">Site Map</a></li>
                             <li><a href="javascript:;">About</a></li>
