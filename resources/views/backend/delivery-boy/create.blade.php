@@ -85,7 +85,7 @@
                                 <h6 class="mb-0">Passowrd</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="password" class="form-control" name="password" />
+                                <input type="text" class="form-control" name="password" value="12345678" />
                                 @error('password')
                                     <div style="color: red;">{{ $message }}</div>
                                 @enderror
@@ -96,7 +96,7 @@
                                 <h6 class="mb-0">Confirm Passowrd</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="password" class="form-control" name="password_confirmation" />
+                                <input type="text" class="form-control" name="password_confirmation" value="12345678" />
                             </div>
                         </div>
                         <div class="row">
