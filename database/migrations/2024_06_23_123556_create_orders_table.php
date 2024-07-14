@@ -25,6 +25,7 @@ return new class extends Migration
       $table->string('zipcode')->nullable();
       $table->string('phone');
       $table->integer('total_amount')->default(0)->nullable();
+      $table->string('payment_option')->nullable();
       $table->enum('status', ['Processing', 'Delivered'])->default('Processing')->nullable();
       $table->unsignedBigInteger('delivered_by')->nullable()->comment('user_id');
       $table->timestamps();

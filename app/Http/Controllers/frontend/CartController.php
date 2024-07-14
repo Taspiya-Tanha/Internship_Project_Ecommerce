@@ -375,7 +375,12 @@ class CartController extends Controller
         'billing_address' => $request->billing_address,
         'zipcode' => $request->zipcode,
         'total_amount' => $request->total_ammount,
+        'payment_option' => $request->payment_option,
       ];
+
+      if ($orderInformation['payment_option'] == "walk-in-customer") {
+          $orderInformation['status'] = "Delivered";
+      }
 
       $order = Order::create($orderInformation);
 
@@ -397,7 +402,7 @@ class CartController extends Controller
           $orderItem->product_price = $item->product_price;
           $orderItem->product_qty = $item->product_qty;
 
-          // Manage (reduce) Stock quantity in the event of ordering 'n' products 
+          // Manage (reduce) Stock quantity in the event of ordering 'n' products
 
           $product = Product::find($item->product_id);
           $product->stock -= $item->product_qty;
@@ -434,11 +439,6 @@ class CartController extends Controller
         'error' => 'please login first',
       ]);
     }
-  }
-
-  public function successOrderMsg()
-  {
-    return view('frontend.payment-gateway.success-order-msg');
   }
 
   public function stripe(Request $request)
@@ -494,4 +494,9 @@ class CartController extends Controller
 
     return redirect()->route('home.create')->with('success', 'Payment successful!');
   }
+
+    public function successOrderMsg()
+    {
+        return view('frontend.payment-gateway.success-order-msg');
+    }
 }
