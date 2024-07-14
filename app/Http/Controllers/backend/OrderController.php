@@ -115,7 +115,7 @@ class OrderController extends Controller
 
         $order = Order::find($request->order_id);
         $order->delivered_by = $request->user_id;
-        $order->status = "Delivered";
+        $order->status = "Dispatched";
         $order->save();
 
         $notification = [

@@ -132,17 +132,23 @@
                             </div>
                         </div>
                         <div class="payment">
-                            <h4 class="mb-20">Payment method</h4>
+                            <h4 class="mb-20">Payment Method</h4>
                             <div class="payment_option">
-
-
                                 <div class="custome-radio">
                                     <input class="form-check-input" required="" type="radio" name="payment_option"
-                                        id="exampleRadios5" checked="" name="stripe_method">
+                                           id="exampleRadios5" checked="" value="walk-in-customer">
                                     <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse"
-                                        data-bs-target="#paypal">Online Getway </label>
+                                           data-bs-target="#paypal">Walk In Customer</label>
                                     <img class="ml-10" src="assets/img/icons/paypal.svg" alt="">
                                 </div>
+                                <div class="custome-radio">
+                                    <input class="form-check-input" required="" type="radio" name="payment_option"
+                                           id="exampleRadios5" checked="" value="online(strip)">
+                                    <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse"
+                                           data-bs-target="#paypal">Online Getway </label>
+                                    <img class="ml-10" src="assets/img/icons/paypal.svg" alt="">
+                                </div>
+
                             </div>
                             <div class="terms-conditions-pay">
                                 <p>Your personal data will be used to process your order, support your experience throughout
@@ -159,11 +165,10 @@
                                     </label>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        <div class="row">
+                        <div id="stripe-fields" class="row">
                             <div class='form-row row'>
                                 <div class='col-xs-12 form-group required'>
                                     <label class='control-label'>Name on Card</label> <input class='form-control'
@@ -195,8 +200,6 @@
                                         type='text'>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                     <div class="place-orders">
@@ -213,6 +216,20 @@
         <script type="text/javascript">
             $(function() {
 
+                // Initial check to hide or show stripe fields
+                toggleStripeFields();
+
+                // Event listener for payment option change
+                $('input[name="payment_option"]').on('change', toggleStripeFields);
+
+                function toggleStripeFields() {
+                    var paymentOption = $('input[name="payment_option"]:checked').val();
+                    if (paymentOption === 'walk-in-customer') {
+                        $('#stripe-fields').hide(); // Hide Stripe fields if WIC is selected
+                    } else {
+                        $('#stripe-fields').show(); // Show Stripe fields if other option is selected
+                    }
+                }
                 /*------------------------------------------
                 --------------------------------------------
                 Stripe Payment Code
@@ -220,20 +237,21 @@
                 --------------------------------------------*/
 
                 var $form = $(".require-validation");
-
-                $('form.require-validation').bind('submit', function(e) {
-
+                $('form.require-validation').on('submit', function(e) {
                     if (!$form.data('cc-on-file')) {
-                        e.preventDefault();
-                        Stripe.setPublishableKey($form.data('stripe-publishable-key'));
-                        Stripe.createToken({
-                            number: $('.card-number').val(),
-                            cvc: $('.card-cvc').val(),
-                            exp_month: $('.card-expiry-month').val(),
-                            exp_year: $('.card-expiry-year').val()
-                        }, stripeResponseHandler);
+                        // Get selected payment option
+                        var paymentOption = $('input[name="payment_option"]:checked').val();
+                        if (paymentOption !== 'walk-in-customer') { // Check if the selected option is not 'Walk In Customer'
+                            e.preventDefault();
+                            Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+                            Stripe.createToken({
+                                number: $('.card-number').val(),
+                                cvc: $('.card-cvc').val(),
+                                exp_month: $('.card-expiry-month').val(),
+                                exp_year: $('.card-expiry-year').val()
+                            }, stripeResponseHandler);
+                        }
                     }
-
                 });
 
                 /*------------------------------------------
@@ -256,7 +274,6 @@
                         $form.get(0).submit();
                     }
                 }
-
             });
         </script>
     @endpush
