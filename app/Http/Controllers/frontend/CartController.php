@@ -6,11 +6,9 @@ use Stripe;
 use Session;
 use Stripe\Charge;
 use App\Models\Cart;
-use App\Models\User;
 use Stripe\Customer;
 use App\Models\Cupon;
 use App\Models\Product;
-use App\Models\ProductPrice;
 use Illuminate\Http\Request;
 use App\Models\DiscountPrice;
 use App\Models\ProductWishlist;
@@ -268,6 +266,9 @@ class CartController extends Controller
       return back()->with($notification);
     }
   }
+  /**
+   * This is comment for offer method
+   */
   public function offer(Request $request)
   {
     $cuponName = Cupon::where('name', $request->offer)->first();
