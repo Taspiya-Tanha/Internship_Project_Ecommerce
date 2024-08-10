@@ -138,9 +138,16 @@
 
                                 <div class="custome-radio">
                                     <input class="form-check-input" required="" type="radio" name="payment_option"
-                                        id="exampleRadios5" checked="" name="stripe_method">
-                                    <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse"
-                                        data-bs-target="#paypal">Online Getway </label>
+                                           id="walkinin" checked="" value="self-pickup">
+                                    <label class="form-check-label" for="walkinin" data-bs-toggle="collapse"
+                                           data-bs-target="#paypal">Self Pickup</label>
+                                    <img class="ml-10" src="assets/img/icons/paypal.svg" alt="">
+                                </div>
+                                <div class="custome-radio">
+                                    <input class="form-check-input" required="" type="radio" name="payment_option"
+                                           id="exampleradioonline" checked="" value="cod">
+                                    <label class="form-check-label" for="exampleradioonline" data-bs-toggle="collapse"
+                                           data-bs-target="#paypal">Cash on Delivery</label>
                                     <img class="ml-10" src="assets/img/icons/paypal.svg" alt="">
                                 </div>
                             </div>
@@ -213,6 +220,20 @@
         <script type="text/javascript">
             $(function() {
 
+                // Initial check to hide or show stripe fields
+                toggleStripeFields();
+
+                // Event listener for payment option change
+                $('input[name="payment_option"]').on('change', toggleStripeFields);
+
+                function toggleStripeFields() {
+                    var paymentOption = $('input[name="payment_option"]:checked').val();
+                    if (paymentOption == 'cod') {
+                        $('#stripe-fields').hide(); // Hide Stripe fields if WIC is selected
+                    } else {
+                        $('#stripe-fields').show(); // Show Stripe fields if other option is selected
+                    }
+                }
                 /*------------------------------------------
                 --------------------------------------------
                 Stripe Payment Code
@@ -224,16 +245,19 @@
                 $('form.require-validation').bind('submit', function(e) {
 
                     if (!$form.data('cc-on-file')) {
-                        e.preventDefault();
-                        Stripe.setPublishableKey($form.data('stripe-publishable-key'));
-                        Stripe.createToken({
-                            number: $('.card-number').val(),
-                            cvc: $('.card-cvc').val(),
-                            exp_month: $('.card-expiry-month').val(),
-                            exp_year: $('.card-expiry-year').val()
-                        }, stripeResponseHandler);
+                        // Get selected payment option
+                        var paymentOption = $('input[name="payment_option"]:checked').val();
+                        if (paymentOption == 'self-pickup') { // Check if the selected option is not 'Walk In Customer'
+                            e.preventDefault();
+                            Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+                            Stripe.createToken({
+                                number: $('.card-number').val(),
+                                cvc: $('.card-cvc').val(),
+                                exp_month: $('.card-expiry-month').val(),
+                                exp_year: $('.card-expiry-year').val()
+                            }, stripeResponseHandler);
+                        }
                     }
-
                 });
 
                 /*------------------------------------------
