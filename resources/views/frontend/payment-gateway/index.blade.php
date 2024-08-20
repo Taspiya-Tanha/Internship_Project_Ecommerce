@@ -143,9 +143,16 @@
                                 </div>
                                 <div class="custome-radio">
                                     <input class="form-check-input" required="" type="radio" name="payment_option"
-                                           id="exampleRadios5" checked="" value="online(strip)">
-                                    <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse"
-                                           data-bs-target="#paypal">Online Getway </label>
+                                           id="walkinin" checked="" value="self-pickup">
+                                    <label class="form-check-label" for="walkinin" data-bs-toggle="collapse"
+                                           data-bs-target="#paypal">Self Pickup</label>
+                                    <img class="ml-10" src="assets/img/icons/paypal.svg" alt="">
+                                </div>
+                                <div class="custome-radio">
+                                    <input class="form-check-input" required="" type="radio" name="payment_option"
+                                           id="exampleradioonline" checked="" value="cod">
+                                    <label class="form-check-label" for="exampleradioonline" data-bs-toggle="collapse"
+                                           data-bs-target="#paypal">Cash on Delivery</label>
                                     <img class="ml-10" src="assets/img/icons/paypal.svg" alt="">
                                 </div>
 
@@ -224,7 +231,7 @@
 
                 function toggleStripeFields() {
                     var paymentOption = $('input[name="payment_option"]:checked').val();
-                    if (paymentOption === 'walk-in-customer') {
+                    if (paymentOption == 'cod') {
                         $('#stripe-fields').hide(); // Hide Stripe fields if WIC is selected
                     } else {
                         $('#stripe-fields').show(); // Show Stripe fields if other option is selected
@@ -241,7 +248,7 @@
                     if (!$form.data('cc-on-file')) {
                         // Get selected payment option
                         var paymentOption = $('input[name="payment_option"]:checked').val();
-                        if (paymentOption !== 'walk-in-customer') { // Check if the selected option is not 'Walk In Customer'
+                        if (paymentOption == 'self-pickup') { // Check if the selected option is not 'Walk In Customer'
                             e.preventDefault();
                             Stripe.setPublishableKey($form.data('stripe-publishable-key'));
                             Stripe.createToken({
