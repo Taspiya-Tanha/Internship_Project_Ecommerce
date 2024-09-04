@@ -34,6 +34,8 @@ function PopularProduct()
     });
 
   $countPP = $popularProducts->count();
+
+  // If the fetched products do not have minimum number of purchased products more are added to the list
   if ($countPP < 5) {
     $arbitraryProducts = Product::whereNotIn('id', $popularProducts->pluck('id'))
       ->latest()
