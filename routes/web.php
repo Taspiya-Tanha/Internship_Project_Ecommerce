@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\backend\DeliveryBoyController;
-use App\Http\Controllers\backend\CouponController;
+use App\Http\Controllers\backend\CuponController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\CategoryController;
@@ -89,7 +89,7 @@ Route::group(['middleware' => ['auth', 'role:admin|manager|editor|seller']], fun
         Route::post('/permanent/delete/product/{id}', 'deleteProduct')->name('permanent.delete.product');
     });
 
-    Route::controller(CouponController::class)->group(function () {
+    Route::controller(CuponController::class)->group(function () {
         // All Coupon
         Route::get('/all/product/cupon', 'allCupon')->name('all.product.cupon');
         Route::get('/create/all/cupon', 'createAllCupon')->name('create.all.cupon');

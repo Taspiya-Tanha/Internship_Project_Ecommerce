@@ -10,7 +10,7 @@ use App\Models\CategoryCupon;
 use App\Models\Category;
 use App\Models\Cupon;
 
-class CouponController extends Controller
+class CuponController extends Controller
 {
 
     /*
