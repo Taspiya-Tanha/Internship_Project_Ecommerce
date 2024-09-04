@@ -91,38 +91,52 @@
         <!-- Shop -->
         <section class="digital-shop">
             <div class="container">
+                <div class="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
+                    <h3>Top Seller</h3>
+                    <p>Our Top Sold Products of the Month!</p>
+                </div>
                 <div class="row">
-
-                    @forelse ($most_view as $item)
-                        <div class="col-xl-4 col-md-6 d-flex ">
-                            <div class="digital-group  wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
-                                <div class="pharmacy-equipments">
-                                    <div class="digital-pharmacy">
-                                        <h5>{{ $item->category->cat_name }}<br> <span>{{ $item->title }}</span></h5>
-                                        <h2>{{ intval($item->productPrice != null ? $item->productPrice->price : '') . '$ ' }}
-                                        </h2>
-                                        <span>{{ intval($item->productPrice != null ? $item->productPrice->discount : '') . '$' }}</span>
-                                        <h4><a href="{{ route('product.details.create', $item->slug_unique) }}">Explore <i
-                                                    class="feather-arrow-right ml-5"></i></a>
-                                        </h4>
+                    <div class="col-xl-12">
+                        <div class="feature-product-slider arrow-center position-relative">
+                            <div class="slider-arrow slider-arrow-two carousel-4-columns-arrow"
+                                id="carousel-2-columns-arrows"></div>
+                            <div class="carousel-4-columns carousel-arrow-center" id="carousel-2-columns">
+                                @forelse ($most_view as $item)
+                                    <div class="col-xl-4 col-md-6 d-flex mx-2">
+                                        <div class="digital-group  wow animate__animated animate__fadeInUp"
+                                            data-wow-delay=".1s">
+                                            <div class="pharmacy-equipments">
+                                                <div class="digital-pharmacy">
+                                                    <h5>{{ $item->category->cat_name }}<br> <span>{{ $item->title }}</span>
+                                                    </h5>
+                                                    <h2>{{ intval($item->productPrice != null ? $item->productPrice->price : '') . '$ ' }}
+                                                    </h2>
+                                                    <span>{{ intval($item->productPrice != null ? $item->productPrice->discount : '') . '$' }}</span>
+                                                    <h4><a href="{{ route('product.details.create', $item->slug_unique) }}">Explore
+                                                            <i class="feather-arrow-right ml-5"></i></a>
+                                                    </h4>
+                                                </div>
+                                                <div class="digital-shop-img">
+                                                    <a href="{{ route('product.details.create', $item->slug_unique) }}">
+                                                        <img class="default-img" src="{{ $item->image_url }}"
+                                                            alt="">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="digital-shop-img">
-                                        <a href="{{ route('product.details.create', $item->slug_unique) }}">
-                                            <img class="default-img" src="{{ $item->image_url }}" alt="">
-                                        </a>
-                                    </div>
-                                </div>
+                                @empty
+                                @endforelse
                             </div>
                         </div>
-                    @empty
-                    @endforelse
+                    </div>
                 </div>
             </div>
         </section>
         <!-- /Shop -->
 
         <!-- Category -->
-        <section class="section-category">
+        {{-- <section class="section-category">
             <div class="container">
                 <div class="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
                     <h3 class="">Popular Categories</h3>
@@ -160,7 +174,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
         <!-- /Category -->
 
         <!-- Featured Products -->

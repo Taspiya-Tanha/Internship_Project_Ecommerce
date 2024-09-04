@@ -52,4 +52,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductWishlist::class);
     }
+    
+    public function OrderItem()
+    {
+      return $this->hasMany(OrderItem::class);
+    }
 }
