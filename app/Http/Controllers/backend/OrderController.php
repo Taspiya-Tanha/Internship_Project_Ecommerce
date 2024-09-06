@@ -103,7 +103,7 @@ class OrderController extends Controller
     public function orderAssignCreate($id)
     {
         $order = Order::find($id);
-        $deliveryBoy = User::where('type', 'delivery-boy')->get();
+        $deliveryBoy = User::role('delivery-boy')->get();
         return view('backend.order.assign', compact('order', 'deliveryBoy'));
     }
 

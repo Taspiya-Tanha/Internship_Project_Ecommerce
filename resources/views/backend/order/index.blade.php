@@ -58,9 +58,9 @@
                                         <td>{{ $item->status }}</td>
                                         <td>{{ optional($item->user)->name ?? '-' }}</td>
                                         <td>
-                                            @if($item->payment_option != 'walk-in-customer')
+                                            @if ($item->payment_option != 'walk-in-customer')
                                                 <a class="btn btn-info btn-sm"
-                                                   href="{{ route('orders.assign', $item->id) }}">Assign</a>
+                                                    href="{{ route('orders.assign', $item->id) }}">Assign</a>
                                             @endif
                                             <a class="btn btn-success btn-sm"
                                                 href="{{ route('orders.show', $item->id) }}">View</a>
@@ -69,7 +69,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="text-center">No Category</td>
+                                        <td colspan="5" class="text-center">No Orders</td>
                                     </tr>
                                 @endforelse
 

@@ -49,8 +49,13 @@
     $(document).ready(function() {
         $('#search').on('keyup', function() {
             var value = $(this).val();
+            var role = "{{ Auth::user()->role }}"; // Assuming you have Auth::user() available
+
+            var route = role === 'delivery-boy' ? "{{ route('delivery.dashboard') }}" :
+                "{{ route('dashboard') }}";
+
             $.ajax({
-                url: "{{ route('dashboard') }}",
+                url: route,
                 type: "GET",
                 data: {
                     'title': value

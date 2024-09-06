@@ -12,48 +12,50 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
-    public function create(): View
-    {
-        return view('auth.login');
+  /**
+   * Display the login view.
+   */
+  public function create(): View
+  {
+    return view('auth.login');
+  }
+
+  /**
+   * Handle an incoming authentication request.
+   */
+  public function store(LoginRequest $request): RedirectResponse
+  {
+    $request->authenticate();
+
+    $request->session()->regenerate();
+    if (Auth::user()->getRoleNames()->first() == 'admin') {
+
+      return redirect()->route('dashboard');
+    } elseif (Auth::user()->getRoleNames()->first() == 'manager') {
+      return redirect()->route('dashboard');
+    } elseif (Auth::user()->getRoleNames()->first() == 'editor') {
+      return redirect()->route('dashboard');
+    } elseif (Auth::user()->getRoleNames()->first() == 'seller') {
+      return redirect()->route('dashboard');
+    } elseif (Auth::user()->getRoleNames()->first() == 'delivery-boy') {
+      return redirect()->route('dashboard');
+    } else {
+      return redirect()->route('profile.me');
     }
+    // return redirect()->intended(RouteServiceProvider::HOME);
+  }
 
-    /**
-     * Handle an incoming authentication request.
-     */
-    public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+  /**
+   * Destroy an authenticated session.
+   */
+  public function destroy(Request $request): RedirectResponse
+  {
+    Auth::guard('web')->logout();
 
-        $request->session()->regenerate();
-        if (Auth::user()->getRoleNames()->first() == 'admin') {
+    $request->session()->invalidate();
 
-            return redirect()->route('dashboard');
-        } elseif (Auth::user()->getRoleNames()->first() == 'manager') {
-            return redirect()->route('dashboard');
-        } elseif (Auth::user()->getRoleNames()->first() == 'editor') {
-            return redirect()->route('dashboard');
-        } elseif (Auth::user()->getRoleNames()->first() == 'seller') {
-            return redirect()->route('dashboard');
-        } else {
-            return redirect()->route('profile.me');
-        }
-        // return redirect()->intended(RouteServiceProvider::HOME);
-    }
+    $request->session()->regenerateToken();
 
-    /**
-     * Destroy an authenticated session.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/');
-    }
+    return redirect('/');
+  }
 }

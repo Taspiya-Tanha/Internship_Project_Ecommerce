@@ -16,7 +16,9 @@ class DeliveryBoyController extends Controller
      */
     public function index()
     {
-        $deliveryBoys = User::where('type', 'Delivery-Boy')->get();
+        // $deliveryBoys = User::where('type', 'delivery-boy')->get();
+        $deliveryBoys = User::role('delivery-boy')->get();
+
         return view('backend.delivery-boy.index', compact('deliveryBoys'));
     }
 
@@ -56,7 +58,9 @@ class DeliveryBoyController extends Controller
             'nid' => $request->nid,
         ]);
 
-        $user->type = 'Delivery-Boy';
+        // $user->type = 'delivery-boy';
+        $user->assignRole('delivery-boy');
+
         $user->save();
 
         $notification = [

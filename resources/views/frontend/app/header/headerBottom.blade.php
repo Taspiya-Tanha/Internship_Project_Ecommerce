@@ -56,6 +56,8 @@
                                             <li><a href="{{ route('profile.myOrder') }}">My Order</a></li>
                                             <li><a href="{{ route('view.cart', $authUser->id) }}">Cart</a></li>
                                             <li><a href="{{ route('viewToWishts', $authUser->id) }}">Wishlist</a></li>
+                                        @elseif (Auth::user()->roles[0]->name == 'delivery-boy')
+                                            <li><a href="{{ route('delivery.index') }}">Dashboard</a></li>
                                         @else
                                             <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                                         @endif
