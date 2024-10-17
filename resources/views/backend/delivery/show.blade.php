@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    @if (!$order->status == 'Delivered')
+    @if ($order->status != 'Delivered')
         <a href="{{ route('delivery.send_email_otp', $order->id) }}" class="btn btn-primary">Send OTP</a>
 
 
