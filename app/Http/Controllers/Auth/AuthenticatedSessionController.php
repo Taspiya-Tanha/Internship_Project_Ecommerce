@@ -38,7 +38,7 @@ class AuthenticatedSessionController extends Controller
     } elseif (Auth::user()->getRoleNames()->first() == 'seller') {
       return redirect()->route('dashboard');
     } elseif (Auth::user()->getRoleNames()->first() == 'delivery-boy') {
-      return redirect()->route('dashboard');
+      return redirect()->route('delivery.dashboard');
     } else {
       return redirect()->route('profile.me');
     }

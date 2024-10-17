@@ -113,6 +113,8 @@ Route::group(['middleware' => ['auth', 'role:delivery-boy']], function () {
   Route::controller(DeliveryController::class, 'DeliveryController')->group(function () {
     Route::get('/delivery/dashboard', 'deliveryDashboard')->name('delivery.dashboard');
     Route::resource('delivery', DeliveryController::class);
+    Route::get('/delivery/send_email_otp/{id}', 'send_email_otp')->name('delivery.send_email_otp');
+    Route::post('/delivery/confirm_delivery', 'confirm_delivery')->name('delivery.confirm_delivery');
   });
 });
 
@@ -240,6 +242,8 @@ Route::controller(CartController::class)->group(function () {
   //order
   Route::post('/place-order', 'placeOrder')->name('placeOrder');
   Route::get('/success-order-msg', 'successOrderMsg')->name('successOrderMsg');
+
+  Route::get('/stripe-charges', 'getCharges')->name('stripeCharges');
 });
 
 // fortend all controller end

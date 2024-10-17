@@ -22,6 +22,7 @@
                                         <th>Total Amount</th>
                                         <th>Billing Address</th>
                                         <th>Status</th>
+                                        <th>Payment Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -48,7 +49,9 @@
                                             <td>{{ $item->total_amount }}</td>
                                             <td>{{ $item->billing_address }}</td>
                                             <td>{{ $item->status }}</td>
-                                            <td><a class="btn btn-sm btn-success" href="{{ route('profile.myOrderView', $item->id) }}">View
+                                            <td>{{ ucfirst($item->charge->status) }}</td>
+                                            <td><a class="btn btn-sm btn-success"
+                                                    href="{{ route('profile.myOrderView', $item->id) }}">View
                                                 </a></td>
                                         </tr>
                                         {{-- @endforeach --}}

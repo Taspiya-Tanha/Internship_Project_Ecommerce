@@ -16,6 +16,8 @@ use App\Http\Controllers\Controller;
 use App\Models\OrderItem;
 use App\Models\Order;
 use Carbon\Carbon;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -380,7 +382,18 @@ class CartController extends Controller
       ];
 
       if ($orderInformation['payment_option'] == "walk-in-customer") {
-          $orderInformation['status'] = "Delivered";
+        $orderInformation['status'] = "Delivered";
+      }
+
+      if ($orderInformation['payment_option'] == "self-pickup") {
+        $charge = $this->stripe($request);
+
+        $orderInformation['charge'] = $charge->id;
+
+        //the datetime is based on the utc +0 time and need to be corrected in future for the local timezone
+        $dateTime = new DateTime('@' . $charge->created, new DateTimeZone(config('app.timezone')));
+
+        $orderInformation['payment_date'] = $dateTime;
       }
 
       $order = Order::create($orderInformation);
@@ -419,7 +432,6 @@ class CartController extends Controller
           }
         }
 
-
         if ($status) {
           // Empty the cart after order placement
           Cart::destroy($cartIds);
@@ -440,6 +452,12 @@ class CartController extends Controller
         'error' => 'please login first',
       ]);
     }
+  }
+
+  public function getCharges()
+  {
+    $order = Order::where('charge', '<>', null)->get();
+    return $order;
   }
 
   public function stripe(Request $request)
@@ -467,7 +485,7 @@ class CartController extends Controller
       'source' => $request->stripeToken,
     ]);
 
-    Charge::create([
+    $charge = Charge::create([
       'amount' => $request->total_ammount * 100,
 
       'currency' => 'usd',
@@ -493,11 +511,13 @@ class CartController extends Controller
       ],
     ]);
 
-    return redirect()->route('home.create')->with('success', 'Payment successful!');
+    return $charge;
+
+    // return redirect()->route('home.create')->with('success', 'Payment successful!');
   }
 
-    public function successOrderMsg()
-    {
-        return view('frontend.payment-gateway.success-order-msg');
-    }
+  public function successOrderMsg()
+  {
+    return view('frontend.payment-gateway.success-order-msg');
+  }
 }

@@ -134,25 +134,25 @@
                         <div class="payment">
                             <h4 class="mb-20">Payment Method</h4>
                             <div class="payment_option">
-                                <div class="custome-radio">
+                                {{-- <div class="custome-radio">
                                     <input class="form-check-input" required="" type="radio" name="payment_option"
                                            id="exampleRadios5" checked="" value="walk-in-customer">
                                     <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse"
                                            data-bs-target="#paypal">Walk In Customer</label>
                                     <img class="ml-10" src="assets/img/icons/paypal.svg" alt="">
-                                </div>
+                                </div> --}}
                                 <div class="custome-radio">
                                     <input class="form-check-input" required="" type="radio" name="payment_option"
-                                           id="walkinin" checked="" value="self-pickup">
+                                        id="walkinin" checked="" value="self-pickup">
                                     <label class="form-check-label" for="walkinin" data-bs-toggle="collapse"
-                                           data-bs-target="#paypal">Self Pickup</label>
+                                        data-bs-target="#paypal">Pay now</label>
                                     <img class="ml-10" src="assets/img/icons/paypal.svg" alt="">
                                 </div>
                                 <div class="custome-radio">
                                     <input class="form-check-input" required="" type="radio" name="payment_option"
-                                           id="exampleradioonline" checked="" value="cod">
+                                        id="exampleradioonline" checked="" value="cod">
                                     <label class="form-check-label" for="exampleradioonline" data-bs-toggle="collapse"
-                                           data-bs-target="#paypal">Cash on Delivery</label>
+                                        data-bs-target="#paypal">Cash on Delivery</label>
                                     <img class="ml-10" src="assets/img/icons/paypal.svg" alt="">
                                 </div>
 
@@ -176,6 +176,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div id="stripe-fields" class="row">
+                            <h4 class="mb-30">Payment Details</h4>
                             <div class='form-row row'>
                                 <div class='col-xs-12 form-group required'>
                                     <label class='control-label'>Name on Card</label> <input class='form-control'
@@ -248,7 +249,8 @@
                     if (!$form.data('cc-on-file')) {
                         // Get selected payment option
                         var paymentOption = $('input[name="payment_option"]:checked').val();
-                        if (paymentOption == 'self-pickup') { // Check if the selected option is not 'Walk In Customer'
+                        if (paymentOption ==
+                            'self-pickup') { // Check if the selected option is not 'Walk In Customer'
                             e.preventDefault();
                             Stripe.setPublishableKey($form.data('stripe-publishable-key'));
                             Stripe.createToken({

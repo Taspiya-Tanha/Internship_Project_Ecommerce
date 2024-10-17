@@ -261,6 +261,7 @@ class HomePageController extends Controller
     // $orders = Order::with('orderItems')->where('user_id', $id)->get();
     $orders = Order::with(['orderItems.product'])->where('user_id', $id)->get();
     // dd($orders);
+
     return view('frontend.profile.my-order', compact('orders'));
   }
 

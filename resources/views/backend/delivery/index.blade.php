@@ -7,7 +7,7 @@
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('delivery.dashboard') }}"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Delivery List</li>
+                    <li class="breadcrumb-item active" aria-current="page">Deliveries</li>
                 </ol>
             </nav>
         </div>
@@ -25,8 +25,11 @@
                                     <th>#</th>
                                     <th>Customer</th>
                                     <th>Phone</th>
-                                    <th>Address</th>
+                                    <th>Country</th>
+                                    <th>City</th>
+                                    <th>Street Address</th>
                                     <th>Total Due</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -36,19 +39,14 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $order->fname }}</td>
                                         <td>{{ $order->phone }}</td>
-                                        <td>{{ $order->address }}</td>
+                                        <td>{{ $order->country }}</td>
+                                        <td>{{ $order->city }}</td>
+                                        <td>{{ $order->billing_address }}</td>
                                         <td>${{ $order->total_amount }}</td>
+                                        <td>{{ $order->status }}</td>
                                         <td>
                                             <a class="btn btn-success btn-sm"
-                                                href="{{ route('delivery-boy.show', $order->id) }}">View</a>
-                                            <a class="btn btn-primary btn-sm"
-                                                href="{{ route('delivery-boy.edit', $order->id) }}">Edit</a>
-                                            <form action="{{ route('delivery-boy.destroy', $order->id) }}" method="POST"
-                                                style="display:inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                            </form>
+                                                href="{{ route('delivery.show', $order->id) }}">View</a>
                                         </td>
                                     </tr>
                                 @empty

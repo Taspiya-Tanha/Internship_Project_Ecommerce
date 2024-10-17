@@ -31,9 +31,37 @@
             <p><strong>Customer Name:</strong> {{ $order->fname }}</p>
             <p><strong>Customer Email:</strong> {{ $order->email }}</p>
             <p><strong>Order Date:</strong> {{ $order->created_at->format('d M Y') }}</p>
-            <p><strong>Status:</strong> {{ $order->status }}</p>
+            <p><strong>Order Status:</strong> {{ $order->status }}</p>
         </div>
     </div>
+
+
+
+    @if (isset($charge))
+        @php
+            $charge_created = new DateTime('@' . $charge->created, new DateTimeZone(Config::get('app.timezone')));
+            $charge_created = $charge_created->format('Y-m-d H:i:s');
+
+        @endphp
+        <div class="card mb-3">
+            <div class="card-header">
+                <h2>Payment Details</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Payment Status:</strong> {{ $charge->paid == 'true' ? 'Paid' : 'Pending' }}</p>
+                <p><strong>Funding Method:</strong> {{ Str::ucfirst($charge->source->funding) }}</p>
+                <p><strong>Amount:</strong> ${{ number_format($charge->amount / 100, 2) }}</p>
+                <p><strong>Currency:</strong> {{ Str::upper($charge->currency) }}</p>
+                <p><strong>Payment Capture Time:</strong> {{ $charge_created }}</p>
+            </div>
+    @endif
+    </div>
+    {{-- 
+    @php
+        echo '<pre>';
+        var_dump($charge);
+        echo '</pre>';
+    @endphp --}}
 
     <h2>Order Items</h2>
     <table class="table table-bordered">
