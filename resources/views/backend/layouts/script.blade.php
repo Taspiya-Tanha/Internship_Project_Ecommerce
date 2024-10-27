@@ -16,6 +16,9 @@
 <script src="{{ asset('backend/assets/plugins/apexcharts-bundle/js/apexcharts.min.js') }}"></script>
 <script src="{{ asset('backend/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('backend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+{{-- fontawesome --}}
+<script src="https://kit.fontawesome.com/622cc589c6.js" crossorigin="anonymous"></script>
+
 {{-- Ckeditor --}}
 <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 <script>

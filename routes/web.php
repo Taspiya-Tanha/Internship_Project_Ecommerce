@@ -16,6 +16,7 @@ use App\Http\Controllers\backend\RecycleBinController;
 use App\Http\Controllers\backend\SubCategoryController;
 use App\Http\Controllers\backend\AdminProfileController;
 use App\Http\Controllers\backend\OrderController;
+use App\Http\Controllers\backend\ReportController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\frontend\ProductsListsController;
 use Illuminate\Support\Facades\Artisan;
@@ -107,6 +108,15 @@ Route::group(['middleware' => ['auth', 'role:admin|manager|editor|seller']], fun
 
   // Delivery-Boy
   Route::resource('delivery-boy', DeliveryBoyController::class);
+
+  // Report
+  Route::controller(ReportController::class)->group(function(){
+    // Route::get('/report/sales', 'showSalesRpt')->name('report.sales');
+    Route::get('/report/sales/{status?}','showSalesRpt')->name('report.sales');;
+
+    Route::get('/report/pl', 'showPLRpt')->name('report.pl');
+    Route::get('/report/stock', 'showStocksRpt')->name('report.stocks');
+  });
 });
 
 Route::group(['middleware' => ['auth', 'role:delivery-boy']], function () {
