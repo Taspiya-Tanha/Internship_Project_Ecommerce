@@ -27,7 +27,7 @@ function PopularProduct()
   }])
     ->with('category', 'productPrice')
     ->orderBy('order_item_count', 'desc')
-    // ->limit(5)
+    ->limit(5)
     ->get()
     ->filter(function ($product) {
       return $product->order_item_count > 0;
