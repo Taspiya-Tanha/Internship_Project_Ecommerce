@@ -17,7 +17,7 @@ class ProductPriceModifierSeeder extends Seeder
     {
         $products = Product::all();
         foreach ($products as $data) {
-          $data->purchase_price = rand(1500, 4500);
+          $data->purchase_price = rand(500, $data->productPrice->price - 300);
           $data->save();
         }
     }
