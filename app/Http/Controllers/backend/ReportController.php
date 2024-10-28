@@ -10,10 +10,15 @@ class ReportController extends Controller
 {
   public function showSalesRpt(Request $request, $status = 'Processing')
   {
+
     $completed_orders = Order::with('orderItems')
-      ->whereNotNull('charge')
-      ->where('status', $status)
-      ->get();
+      ->whereNotNull('charge');
+
+    if ($status !== 'ALL') {
+      $completed_orders = $completed_orders->where('status', $status);
+    }
+
+    $completed_orders = $completed_orders->get();
 
     $total_profit = $completed_orders->sum(function ($order) {
       return $order->orderItems->sum(function ($orderItem) {

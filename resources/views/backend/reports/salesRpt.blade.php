@@ -27,6 +27,10 @@
                     <a class="nav-link {{ $status == 'Delivered' ? 'active' : '' }}"
                         href="{{ route('report.sales', 'Delivered') }}" data-toggle="tab">Delivered</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ $status == 'ALL' ? 'active' : '' }}"
+                        href="{{ route('report.sales', 'ALL') }}" data-toggle="tab">ALL</a>
+                </li>
             </ul>
             <div class="tab-content">
                 <div class="table-responsive shopping-table order-tables">
