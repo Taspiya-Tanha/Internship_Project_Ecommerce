@@ -73,7 +73,9 @@ class CartController extends Controller
       ->where('id', $request->productId)
       ->first();
     if (Auth::check()) {
-      $productCart = Cart::where(['product_id', $request->productId, 'user_id', Auth::user()->id])->first();
+      $productCart = Cart::where('product_id', $request->productId)
+        ->where('user_id', Auth::id())
+        ->first();
       if ($productCart == true) {
         $productCart->product_qty = $productCart->product_qty + 1;
         $productCart->price += $product->productPrice->price;
@@ -189,8 +191,7 @@ class CartController extends Controller
 
   public function deleteCart($id)
   {
-    $cart = ProductWishlist::find($id);
-    // dd($cart);
+    $cart = Cart::find($id);
     $cart->delete();
     $notification = [
       'message' => 'Product Successfully Deleted',
@@ -385,7 +386,7 @@ class CartController extends Controller
         $orderInformation['status'] = "Delivered";
       }
 
-      if ($orderInformation['payment_option'] == "self-pickup") {
+      if ($orderInformation['payment_option'] == "stripe") {
         $charge = $this->stripe($request);
 
         $orderInformation['charge'] = $charge->id;
