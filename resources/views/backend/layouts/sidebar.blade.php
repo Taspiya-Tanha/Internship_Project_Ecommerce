@@ -115,7 +115,7 @@
           </li>
           {{-- <li> <a href="{{ route('orders.index') }}"><i class="bx bx-right-arrow-alt"></i>PL Report</a>
           </li> --}}
-          <li> <a href="{{ route('orders.index') }}"><i class="bx bx-right-arrow-alt"></i>Stock Report</a>
+          <li> <a href="{{ route('report.stocks') }}"><i class="bx bx-right-arrow-alt"></i>Stock Report</a>
           </li>
 
       </ul>
