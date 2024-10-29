@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\backend\DeliveryBoyController;
 use App\Http\Controllers\backend\CuponController;
@@ -110,11 +109,9 @@ Route::group(['middleware' => ['auth', 'role:admin|manager|editor|seller']], fun
   Route::resource('delivery-boy', DeliveryBoyController::class);
 
   // Report
-  Route::controller(ReportController::class)->group(function(){
+  Route::controller(ReportController::class)->group(function () {
     // Route::get('/report/sales', 'showSalesRpt')->name('report.sales');
-    Route::get('/report/sales/{status?}','showSalesRpt')->name('report.sales');;
-
-    Route::get('/report/pl', 'showPLRpt')->name('report.pl');
+    Route::get('/report/sales/{status?}', 'showSalesRpt')->name('report.sales');;
     Route::get('/report/stock', 'showStocksRpt')->name('report.stocks');
   });
 });
@@ -185,9 +182,9 @@ Route::controller(HomePageController::class)->group(function () {
     | Profile route
     |--------------------------------------------------------------------------
     */
-  Route::get('/profile/me', 'profileMe')->name('profile.me');
-  Route::get('/profile/my-order', 'profileMyOrder')->name('profile.myOrder');
-  Route::get('/profile/my-order/{id}', 'profileMyOrderView')->name('profile.myOrderView');
+  Route::get('/profile/me', 'profileMe')->name('profile.me')->middleware('auth');
+  Route::get('/profile/my-order', 'profileMyOrder')->name('profile.myOrder')->middleware('auth');
+  Route::get('/profile/my-order/{id}', 'profileMyOrderView')->name('profile.myOrderView')->middleware('auth');
   // password page
   Route::get('/password/page', 'createPasswordPage')->name('password.create');
   // odrer page

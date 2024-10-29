@@ -28,8 +28,8 @@
                         href="{{ route('report.sales', 'Delivered') }}" data-toggle="tab">Delivered</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ $status == 'ALL' ? 'active' : '' }}"
-                        href="{{ route('report.sales', 'ALL') }}" data-toggle="tab">ALL</a>
+                    <a class="nav-link {{ $status == 'ALL' ? 'active' : '' }}" href="{{ route('report.sales', 'ALL') }}"
+                        data-toggle="tab">ALL</a>
                 </li>
             </ul>
             <div class="tab-content">
@@ -53,16 +53,17 @@
                                     <td>{{ $order->fname }}</td>
                                     <td>{{ $order->created_at }}</td>
                                     <td>${{ $order->total_amount }}</td>
-                                    <td>{{ $order->payment_option }}</td>
+                                    <td>{{ $order->payment_option == 'stripe' ? Str::upper($order->charge->payment_method_details->card->brand . ' ' . $order->charge->payment_method_details->card->funding . ' ' . $order->charge->payment_method_details->type) : ($order->payment_option == 'cod' ? 'COD' : 'N/A') }}
+                                    </td>
                                     <td>{{ $order->status }}</td>
-                                    <td class="text-3xl text-center relative">
+                                    <td class="text-lg text-center">
                                         <i class="action-button fa-solid fa-circle-chevron-down cursor-pointer"></i>
-                                        <div class="context-menu absolute hidden bg-gray-300 rounded-md shadow-lg">
+                                        <div class="context-menu hidden bg-gray-300 rounded-md shadow-lg">
                                             <ul class="!list-none">
-                                                <li class="items-toggle py-2 px-4 text-gray-900 hover:bg-gray-100">Show
+                                                <li class="items-toggle p-2 text-gray-900 hover:bg-gray-100">Show
                                                     Items</li>
                                                 <li data-order-id="{{ $order->id }}"
-                                                    class="open-order-link py-2 px-4 text-gray-900 hover:bg-gray-100">Open
+                                                    class="open-order-link p-2 text-gray-900 hover:bg-gray-100">Open
                                                     Order</li>
                                             </ul>
                                         </div>
@@ -73,6 +74,7 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
+                                                    <th>Image</th>
                                                     <th>Product Name</th>
                                                     <th>Product Purchase Price</th>
                                                     <th>Product Price</th>
@@ -85,6 +87,15 @@
                                             <tbody>
                                                 @foreach ($order->orderItems as $orderItem)
                                                     <tr>
+                                                        <td>
+                                                            @if ($orderItem->product->image_url)
+                                                                <img src="{{ $orderItem->product->image_url }}"
+                                                                    alt="{{ $orderItem->product->title }}" width="50"
+                                                                    height="50" />
+                                                            @else
+                                                                N/A
+                                                            @endif
+                                                        </td>
                                                         <td>{{ $orderItem->product->title }}</td>
                                                         <td>${{ $orderItem->product->purchase_price }}</td>
                                                         <td>${{ $orderItem->price }}</td>
@@ -106,7 +117,7 @@
         </div>
 
         <div class="small-box bg-info">
-            <div class="inner">
+            <div class="inner px-3 py-1">
                 <h3>{{ $totalSkusSold }}</h3>
                 <p>Total SKUs {{ $status }}</p>
             </div>
@@ -116,28 +127,35 @@
         </div>
 
         <div class="small-box bg-success">
-            <div class="inner">
-
+            <div class="inner px-3 py-1">
                 <h3>${{ $totalSalesAmount }}</h3>
                 <p>Total value of {{ $status }} Items</p>
             </div>
             <div class="icon">
                 <i class="ion ion-stats-bars"></i>
             </div>
-
         </div>
-        <div class="small-box bg-info">
-            <div class="inner">
 
+
+        <div class="small-box bg-orange-500">
+            <div class="inner px-3 py-1">
+                <h3>${{ $totalAmountReceivedFromCard }}</h3>
+                <p> Already received via payment system from {{ $status }} items</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+        </div>
+
+        <div class="small-box bg-info">
+            <div class="inner px-3 py-1">
                 <h3>${{ $total_profit }}</h3>
                 <p>Total Profit from {{ $status }} items</p>
             </div>
             <div class="icon">
                 <i class="ion ion-stats-bars"></i>
             </div>
-
         </div>
-
     </div>
 @endsection
 @push('script')

@@ -143,8 +143,8 @@
                                 </div> --}}
                                 <div class="custome-radio">
                                     <input class="form-check-input" required="" type="radio" name="payment_option"
-                                        id="walkinin" checked="" value="self-pickup">
-                                    <label class="form-check-label" for="walkinin" data-bs-toggle="collapse"
+                                        id="paynow" checked="" value="stripe">
+                                    <label class="form-check-label" for="paynow" data-bs-toggle="collapse"
                                         data-bs-target="#paypal">Pay now</label>
                                     <img class="ml-10" src="assets/img/icons/paypal.svg" alt="">
                                 </div>
@@ -250,7 +250,7 @@
                         // Get selected payment option
                         var paymentOption = $('input[name="payment_option"]:checked').val();
                         if (paymentOption ==
-                            'self-pickup') { // Check if the selected option is not 'Walk In Customer'
+                            'stripe') { // Check if the selected option is not 'Walk In Customer'
                             e.preventDefault();
                             Stripe.setPublishableKey($form.data('stripe-publishable-key'));
                             Stripe.createToken({
