@@ -11,12 +11,12 @@ class OrderItem extends Model
 
   public function order()
   {
-    $this->belongsTo(Order::class);
+    return $this->belongsTo(Order::class);
   }
 
   public function user()
   {
-    $this->belongsTo(User::class);
+    return $this->belongsTo(User::class);
   }
 
   public function product()
@@ -26,6 +26,6 @@ class OrderItem extends Model
 
   public function productPrice()
   {
-    $this->belongsTo(ProductPrice::class);
+    return $this->belongsTo(ProductPrice::class);
   }
 }
