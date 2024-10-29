@@ -49,7 +49,13 @@
                                             <td>{{ $item->total_amount }}</td>
                                             <td>{{ $item->billing_address }}</td>
                                             <td>{{ $item->status }}</td>
-                                            <td>{{ ucfirst($item->charge->status) }}</td>
+                                            <td>
+                                                @isset($item->charge)
+                                                    {{ ucfirst($item->charge->status) }}
+                                                @else
+                                                    Cash on Delivery
+                                                @endisset
+                                            </td>
                                             <td><a class="btn btn-sm btn-success"
                                                     href="{{ route('profile.myOrderView', $item->id) }}">View
                                                 </a></td>
