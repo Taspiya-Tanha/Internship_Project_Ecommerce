@@ -121,6 +121,7 @@ Route::group(['middleware' => ['auth', 'role:delivery-boy']], function () {
     Route::get('/delivery/dashboard', 'deliveryDashboard')->name('delivery.dashboard');
     Route::resource('delivery', DeliveryController::class);
     Route::get('/delivery/send_email_otp/{id}', 'send_email_otp')->name('delivery.send_email_otp');
+    Route::get('/delivery/send_sms_otp/{id}', 'send_sms_otp')->name('delivery.send_sms_otp');
     Route::post('/delivery/confirm_delivery', 'confirm_delivery')->name('delivery.confirm_delivery');
   });
 });
