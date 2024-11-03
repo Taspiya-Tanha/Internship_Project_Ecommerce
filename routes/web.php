@@ -111,7 +111,7 @@ Route::group(['middleware' => ['auth', 'role:admin|manager|editor|seller']], fun
   // Report
   Route::controller(ReportController::class)->group(function () {
     // Route::get('/report/sales', 'showSalesRpt')->name('report.sales');
-    Route::get('/report/sales/{status?}', 'showSalesRpt')->name('report.sales');;
+    Route::get('/report/sales/{status?}', 'showSalesRpt')->name('report.sales');
     Route::get('/report/stock', 'showStocksRpt')->name('report.stocks');
   });
 });
