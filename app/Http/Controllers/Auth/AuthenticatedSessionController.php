@@ -30,13 +30,13 @@ class AuthenticatedSessionController extends Controller
     $request->session()->regenerate();
     if (Auth::user()->getRoleNames()->first() == 'admin') {
 
-      return redirect()->route('dashboard');
+      return redirect()->route('report.sales');
     } elseif (Auth::user()->getRoleNames()->first() == 'manager') {
-      return redirect()->route('dashboard');
+      return redirect()->route('report.sales');
     } elseif (Auth::user()->getRoleNames()->first() == 'editor') {
-      return redirect()->route('dashboard');
+      return redirect()->route('report.sales');
     } elseif (Auth::user()->getRoleNames()->first() == 'seller') {
-      return redirect()->route('dashboard');
+      return redirect()->route('report.sales');
     } elseif (Auth::user()->getRoleNames()->first() == 'delivery-boy') {
       return redirect()->route('delivery.dashboard');
     } else {

@@ -26,6 +26,6 @@ class DashboardController extends Controller
             }
             return $output;
         }
-       return view('backend.dashboard');
+       return view('backend.reports.salesRpt');
     }
 }
