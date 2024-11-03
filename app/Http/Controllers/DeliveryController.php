@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Nanopkg\BulkSmsBd\Facades\BulkSmsBd;
 
 class DeliveryController extends Controller
 {
@@ -75,6 +76,30 @@ class DeliveryController extends Controller
     Mail::to($order->email)->send(new OTPDelivery($order->otp));
 
     return redirect()->back()->with('otp_success', 'OTP sent to customer\'s email');
+  }
+
+  public function send_sms_otp($id)
+  {
+    $order = Order::findOrFail($id);
+
+    // Generate
+    $otp = Str::random(6);
+
+    // Store OTP in the database
+    $order->otp = $otp;
+    $order->otp_expiration = now()->addMinutes(5)->toDateTime();
+    $order->save();
+
+    // Send OTP SMS
+    try {
+      $response = BulkSmsBd::oneToOne($order->phone, 'Your Nookx OTP is: ' . $otp)->send();
+
+      if ($response) {
+        return redirect()->back()->with('otp_success', 'OTP sent to customer\'s phone');
+      }
+    } catch (\Exception $e) {
+      return redirect()->back()->withErrors(['failure' => 'Something went wrong. ' . $e->getMessage()]);
+    }
   }
 
   /**

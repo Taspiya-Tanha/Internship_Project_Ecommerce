@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3432425ad971abb31c019371a9455c6",
+    "content-hash": "7b9a8b8673db08c31121e73f253237fc",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -2958,6 +2958,95 @@
             "time": "2024-04-12T20:52:51+00:00"
         },
         {
+            "name": "nanopkg/laravel-bulk-sms-bd",
+            "version": "3.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nanopkg/laravel-bulk-sms-bd.git",
+                "reference": "d1adebcd3d35a74a22094ac3d66cc1046cfe0295"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nanopkg/laravel-bulk-sms-bd/zipball/d1adebcd3d35a74a22094ac3d66cc1046cfe0295",
+                "reference": "d1adebcd3d35a74a22094ac3d66cc1046cfe0295",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.5",
+                "illuminate/contracts": "^9.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.13.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^6.0",
+                "orchestra/testbench": "^7.0",
+                "pestphp/pest": "^1.23",
+                "pestphp/pest-plugin-laravel": "^1.4",
+                "phpstan/phpstan": "^1.12",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9.6",
+                "spatie/laravel-ray": "^1.26"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Nanopkg\\BulkSmsBd\\BulkSmsBdServiceProvider"
+                    ],
+                    "aliases": {
+                        "BulkSmsBd": "Nanopkg\\BulkSmsBd\\Facades\\BulkSmsBd"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nanopkg\\BulkSmsBd\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "IQBAL HASAN",
+                    "email": "iqbalhasan.dev@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "SYED SHAZEEDUL ISLAM",
+                    "email": "syedshazeedul@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "With this package you can easily integrate bulk sms system in your project with bulksmsbd.com API of Bangladesh.",
+            "homepage": "https://github.com/nanopkg/laravel-bulk-sms-bd",
+            "keywords": [
+                "bulksms",
+                "bulksmsbd",
+                "laravel",
+                "laravel-bulk-sms-bd",
+                "laravel-bulksms",
+                "laravel-bulksmsbd",
+                "laravel-package",
+                "laravel-plugin",
+                "laravel-sms-gateway",
+                "laravel-sms-gateway-intregation",
+                "library",
+                "nanopkg",
+                "package",
+                "plugin",
+                "sms-api"
+            ],
+            "support": {
+                "issues": "https://github.com/nanopkg/laravel-bulk-sms-bd/issues",
+                "source": "https://github.com/nanopkg/laravel-bulk-sms-bd/tree/3.1.2"
+            },
+            "time": "2024-10-10T06:36:29+00:00"
+        },
+        {
             "name": "nesbot/carbon",
             "version": "2.72.5",
             "source": {
@@ -4682,6 +4771,66 @@
                 "source": "https://github.com/MyIntervals/PHP-CSS-Parser/tree/v8.6.0"
             },
             "time": "2024-07-01T07:33:21+00:00"
+        },
+        {
+            "name": "spatie/laravel-package-tools",
+            "version": "1.16.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-package-tools.git",
+                "reference": "c7413972cf22ffdff97b68499c22baa04eddb6a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/c7413972cf22ffdff97b68499c22baa04eddb6a2",
+                "reference": "c7413972cf22ffdff97b68499c22baa04eddb6a2",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.28|^10.0|^11.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^7.7|^8.0",
+                "pestphp/pest": "^1.22",
+                "phpunit/phpunit": "^9.5.24",
+                "spatie/pest-plugin-test-time": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelPackageTools\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Tools for creating Laravel packages",
+            "homepage": "https://github.com/spatie/laravel-package-tools",
+            "keywords": [
+                "laravel-package-tools",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-package-tools/issues",
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.5"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-08-27T18:56:10+00:00"
         },
         {
             "name": "spatie/laravel-permission",
@@ -10266,5 +10415,5 @@
         "php": "^8.0.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

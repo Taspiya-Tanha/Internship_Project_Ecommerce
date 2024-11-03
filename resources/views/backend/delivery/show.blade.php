@@ -29,7 +29,23 @@
     </div>
 
     @if ($order->status != 'Delivered')
-        <a href="{{ route('delivery.send_email_otp', $order->id) }}" class="btn btn-primary">Send OTP</a>
+        {{-- <a href="{{ route('delivery.send_email_otp', $order->id) }}" class="btn btn-primary">Send OTP</a> --}}
+
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+
+                Send OTP
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                    <a class="dropdown-item" href="{{ route('delivery.send_sms_otp', $order->id) }}">SMS</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ route('delivery.send_email_otp', $order->id) }}">Email</a>
+                </li>
+            </ul>
+        </div>
 
 
         @if (session('otp_success'))
@@ -51,8 +67,13 @@
 
         @if (session('otp_match'))
             <p class="text-success">{{ session('otp_match') }}</p>
-        @elseif (session('failure'))
-            <p class="text-danger">{{ session('failure') }}</p>
+        @endif
+        @if ($errors->any())
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li class="text-danger">{{ $error }}</li>
+                @endforeach
+            </ul>
         @endif
     @endif
 @endsection
