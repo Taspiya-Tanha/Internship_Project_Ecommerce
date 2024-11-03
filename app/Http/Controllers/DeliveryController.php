@@ -30,7 +30,9 @@ class DeliveryController extends Controller
    */
   public function deliveryDashboard()
   {
-    return view('backend.delivery.dashboard');
+    $id = Auth::id();
+    $deliverables = Order::where('delivered_by', $id)->get();
+    return view('backend.delivery.index', compact('deliverables'));
   }
 
   /**
@@ -55,6 +57,30 @@ class DeliveryController extends Controller
     return redirect()->back()->with('otp_match', 'Delivery confirmed');
   }
 
+
+  private function generateUniqueOTP()
+  {
+    $otp = '';
+    $prev_digit = -1;
+    $consecutive_count = 0;
+
+    while (strlen($otp) < 6) {
+      $digit = rand(0, 9);
+      if ($digit == $prev_digit) {
+        $consecutive_count++;
+        if ($consecutive_count > 1) {
+          continue; // Skip if more than two consecutive digits
+        }
+      } else {
+        $consecutive_count = 0;
+      }
+      $otp .= $digit;
+      $prev_digit = $digit;
+    }
+
+    return $otp;
+  }
+
   /**
    * Send OTP
    * 
@@ -65,7 +91,7 @@ class DeliveryController extends Controller
     $order = Order::findOrFail($id);
 
     // Generate OTP
-    $otp = Str::random(6);
+    $otp = $this->generateUniqueOTP();
 
     // Store OTP in the database
     $order->otp = $otp;
@@ -78,12 +104,13 @@ class DeliveryController extends Controller
     return redirect()->back()->with('otp_success', 'OTP sent to customer\'s email');
   }
 
+
   public function send_sms_otp($id)
   {
     $order = Order::findOrFail($id);
 
     // Generate
-    $otp = Str::random(6);
+    $otp = $this->generateUniqueOTP();
 
     // Store OTP in the database
     $order->otp = $otp;
