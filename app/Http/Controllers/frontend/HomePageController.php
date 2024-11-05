@@ -26,19 +26,17 @@ function PopularProduct()
     $query->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
   }])
     ->with('category', 'productPrice')
+    ->having('order_item_count', '>', 0)
     ->orderBy('order_item_count', 'desc')
     ->limit(5)
-    ->get()
-    ->filter(function ($product) {
-      return $product->order_item_count > 0;
-    });
+    ->get();
 
   $countPP = $popularProducts->count();
 
   // If the fetched products do not have minimum number of purchased products more are added to the list
   if ($countPP < 5) {
     $arbitraryProducts = Product::whereNotIn('id', $popularProducts->pluck('id'))
-      ->latest()
+      ->inRandomOrder() // Or use another criterion like `orderBy('created_at', 'desc')`
       ->with('category', 'productPrice')
       ->limit(8 - $countPP)
       ->get();
