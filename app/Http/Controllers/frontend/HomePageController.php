@@ -17,21 +17,19 @@ use Illuminate\Support\Facades\Hash;
 
 function PopularProduct()
 {
-  $startOfMonth = Carbon::now()->startOfMonth();
-  $endOfMonth = Carbon::now()->endOfMonth();
+  $startOfMonth = Carbon::now()->subMonths(6)->startOfMonth();
+  $endOfMonth = Carbon::now()->addMonths(6)->endOfMonth();
 
-
-  // Fetch the most frequently ordered products in the current month
-  $popularProducts = Product::withCount(['OrderItem' => function ($query) use ($startOfMonth, $endOfMonth) {
-    $query->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
-  }])
-    ->with('category', 'productPrice')
-    ->orderBy('order_item_count', 'desc')
-    ->limit(5)
-    ->get()
-    ->filter(function ($product) {
-      return $product->order_item_count > 0;
-    });
+  $popularProducts = Product::withCount([
+    'orderItem as total_quantity' => function ($query) use ($startOfMonth, $endOfMonth) {
+      $query->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+        ->selectRaw('sum(product_qty) as total_quantity');
+    }
+  ])
+    ->having('total_quantity', '>', 0) // Ensure products have at least one order
+    ->orderByDesc('total_quantity')
+    ->take(5)
+    ->get();
 
   $countPP = $popularProducts->count();
 
