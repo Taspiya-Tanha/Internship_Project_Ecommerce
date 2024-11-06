@@ -36,7 +36,7 @@ function PopularProduct()
   // If the fetched products do not have minimum number of purchased products more are added to the list
   if ($countPP < 5) {
     $arbitraryProducts = Product::whereNotIn('id', $popularProducts->pluck('id'))
-      ->latest()
+      ->inRandomOrder() // Or use another criterion like `orderBy('created_at', 'desc')`
       ->with('category', 'productPrice')
       ->limit(8 - $countPP)
       ->get();
